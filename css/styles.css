@@ -41,3 +41,8 @@ body {
 .degree h2 {
   font-size: 6rem;
 }
+
+.location-icon {
+  width: 20em;
+  height: 20em;
+}
