@@ -1,10 +1,16 @@
-// let farenheight = temp * 9/5 + 32;
+let currentMeasurement = "celcius";
+let celcius = null;
+let fahrenheit = null;
+let temperatureDegree = document.querySelector(".temperature-degree");
+let degreeName = document.querySelector(".degree-name");
 
 window.addEventListener("load", () => {
   let long, lat;
   let locationTimezone = document.querySelector(".location-timezone");
-  let temperatureDegree = document.querySelector(".temperature-degree");
+  
   let temperatureDescription = document.querySelector(".temperature-description");
+
+ 
   // let locationIcon = document.querySelector(".location-icon");
   // let bodyBackground = document.getElementsByTagName("body");
 
@@ -26,6 +32,7 @@ window.addEventListener("load", () => {
           locationTimezone.textContent = city_name;
           temperatureDegree.textContent = temp;
           temperatureDescription.textContent = weather.description;
+          celcius = temp;
           setIcons(weather, pod);
         })
     })
@@ -104,8 +111,24 @@ window.addEventListener("load", () => {
       console.log("Weather code not matched.")
     }
   }
+
+
   // function changeBackgroundColor(bodyBackground) {
   //   bodyBackground.style.background = "linear-gradient(to right, #ff0099, #493240)"
   // }
 });
 
+function changeMeasurement() {
+  if (currentMeasurement === "celcius") {
+    fahrenheit = celcius * 9/5 + 32;
+    temperatureDegree.textContent = Math.round(fahrenheit).toFixed(1);
+    degreeName.textContent = "F"
+    currentMeasurement = "fahrenheit"
+  }
+
+  else if (currentMeasurement === "fahrenheit") {
+    temperatureDegree.textContent = celcius;
+    degreeName.textContent = "C"
+    currentMeasurement = "celcius"
+  }
+}
