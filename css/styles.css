@@ -10,7 +10,10 @@ body {
   flex-direction: column;
   height: 100vh;
   align-items: center;
-  background: linear-gradient(to bottom, #1565C0, #b92b27);
+  background: #00bf8f;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #001510, #00bf8f);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #001510, #00bf8f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   color: white;
   font-family: sans-serif;
 }
@@ -24,6 +27,14 @@ body {
   width: 50%;
 }
 
+.stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 30vh;
+  width: 80%;
+}
+
 .temperature {
   flex-direction: column;
 }
@@ -31,7 +42,14 @@ body {
 .degree {
   display: flex;
   align-items: center;
+  color: #00bf8f;
   cursor: pointer;
+  transition-property: color;
+  transition-duration: 0.5s;
+}
+
+.degree:hover {
+  color: #4ff8ce;
 }
 
 .degree span {

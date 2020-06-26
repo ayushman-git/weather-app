@@ -3,12 +3,15 @@ let celcius = null;
 let fahrenheit = null;
 let temperatureDegree = document.querySelector(".temperature-degree");
 let degreeName = document.querySelector(".degree-name");
+let uvIndex = document.querySelector(".uv-index");
 
 window.addEventListener("load", () => {
   let long, lat;
   let locationTimezone = document.querySelector(".location-timezone");
-  
+  let windSpeed = document.querySelector(".wind-speed");
   let temperatureDescription = document.querySelector(".temperature-description");
+  let aqiLevel = document.querySelector(".aqi-level");
+  let locationState = document.querySelector(".location-state");
 
  
   // let locationIcon = document.querySelector(".location-icon");
@@ -27,11 +30,15 @@ window.addEventListener("load", () => {
         })
         .then(weatherData => {
           console.log(weatherData);
-          const { city_name, clouds, temp, timezone, uv, weather, pod } = weatherData.data[0];
+          const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir_full, aqi} = weatherData.data[0];
           console.log(city_name, clouds, temp, timezone, uv, weather);
           locationTimezone.textContent = city_name;
           temperatureDegree.textContent = temp;
           temperatureDescription.textContent = weather.description;
+          locationState.textContent = timezone;
+          windSpeed.textContent = "Speed: " + wind_spd.toFixed(1) + "km/h from " + wind_cdir_full;
+          aqiCheck(aqi);
+          uvCheck(uv.toFixed(1));
           celcius = temp;
           setIcons(weather, pod);
         })
@@ -111,11 +118,35 @@ window.addEventListener("load", () => {
       console.log("Weather code not matched.")
     }
   }
+  
+  function aqiCheck(aqi) {
+    if(aqi <= 50) {
+      aqiLevel.textContent = `AQ Index: Good (${aqi})`; 
+    }
+    else if(aqi <= 100) {
+      aqiLevel.textContent = `AQ Index: Satisfactory (${aqi})`; 
+    }
+    else if(aqi <= 200) {
+      aqiLevel.textContent = `AQ Index: Moderate (${aqi})`; 
+    }
+    else if(aqi <= 300) {
+      aqiLevel.textContent = `AQ Index: Poor (${aqi})`; 
+    }
+    else if(aqi <= 400) {
+      aqiLevel.textContent = `AQ Index: Very Poor (${aqi})`; 
+    }
+    else if(aqi <= 500) {
+      aqiLevel.textContent = `AQ Index: Severe (${aqi})`; 
+    }
+  }
 
-
-  // function changeBackgroundColor(bodyBackground) {
-  //   bodyBackground.style.background = "linear-gradient(to right, #ff0099, #493240)"
-  // }
+  function uvCheck(uv) {
+    if(uv <= 2) uvIndex.textContent = `UV Index: Low (${uv})`;
+    else if(uv <= 5) uvIndex.textContent = `UV Index: Moderate (${uv})`;
+    else if(uv <= 7) uvIndex.textContent = `UV Index: High (${uv})`;
+    else if(uv <= 10) uvIndex.textContent = `UV Index: Very High (${uv})`;
+    else if(uv === 11) uvIndex.textContent = `UV Index: Extreme (${uv})`;
+  }
 });
 
 function changeMeasurement() {
