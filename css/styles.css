@@ -36,16 +36,18 @@ body {
 .degree {
   color: #00bf8f;
   cursor: pointer;
-  transition-property: color;
-  transition-duration: 0.5s;
   background: -webkit-linear-gradient(#DAE2F8, #D6A4A4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  transition-property: background;
+  transition-duration: 0.5s;
 }
-
+/* 
 .degree:hover {
-  color: #4ff8ce;
-}
+  background: -webkit-linear-gradient(#ED4264, #FFEDBC);
+  -webkit-background-clip: text;
+  transition: all 1s ease-in-out;
+} */
 
 .degree span {
   font-size: 3em;
@@ -56,12 +58,15 @@ body {
   display: inline-block;
  
 }
-
+.location-icon {
+  width: 1.6em;
+}
 .temperature-description {
   font-size: 3rem;
 }
 .location-city-state h1 {
   display: inline-block;
+  font-size: 2em;
 }
 
 #test {
