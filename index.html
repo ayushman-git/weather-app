@@ -7,26 +7,30 @@
   <title>Weather</title>
 </head>
 <body>
-  <div class="location">
+  <div class="main-container">
+    <h1 class="temperature-description">Cold</h1>
     <div class="location-city-state">
       <h1 class="location-timezone"></h1>
       <span class="location-state">Check</span>
     </div>
     <div id="test"></div>
+    <div class="temperature">
+      <div class="degree" onclick="changeMeasurement()">
+       <h2 class="temperature-degree"></h2>
+       <span class="degree-name">C</span>
+      </div>
+    </div>
   </div>
+  <div class="container wind-speed">
+    <div class="container-header"><h3>Wind Speed</h3></div>
+    <div class="wind-speed-text">Hi</div>
+  </div>
+  <div class="container aqi-level">
+    <div class="container-header"><h3>AQI Level</h3></div>
+    <div class="aqi-level-text">Hi</div>
+  </div>
+  <div class="container uv-index">Hi</div>
 
-  <div class="temperature">
-    <div class="degree" onclick="changeMeasurement()">
-     <h2 class="temperature-degree"></h2>
-     <span class="degree-name">C</span>
-    </div>
-  </div>
-  <div class="stats">
-    <p class="temperature-description">Cold</p>
-    <div class="wind-speed">Hi</div>
-    <div class="aqi-level">Hi</div>
-    <div class="uv-index">Hi</div>
-    </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.6.10/lottie.js" type="text/javascript"></script>
   <script src="./js/index.js"></script>
   

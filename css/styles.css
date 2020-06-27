@@ -5,43 +5,35 @@
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  padding: 5%;
+  display: grid;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 50px;
   height: 100vh;
-  align-items: center;
   background: #00bf8f;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to top, #001510, #00bf8f);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to top, #001510, #00bf8f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
   color: white;
   font-family: sans-serif;
 }
 
-.location,
-.temperature {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 30vh;
-  width: 50%;
+.main-container {
+  padding: 30px;
+  grid-column: 1/3;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  transition-property: background-color;
+  transition: 0.5s;
+  box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.75);
 }
-
-.stats {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 30vh;
-  width: 80%;
-}
-
-.temperature {
-  flex-direction: column;
+.main-container:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .degree {
-  display: flex;
-  align-items: center;
   color: #00bf8f;
   cursor: pointer;
   transition-property: color;
@@ -53,14 +45,51 @@ body {
 }
 
 .degree span {
-  font-size: 2em;
+  font-size: 3em;
 }
 
 .degree h2 {
   font-size: 6rem;
+  display: inline-block;
+}
+
+.temperature-description {
+  font-size: 3rem;
+}
+.location-city-state h1 {
+  display: inline-block;
 }
 
 #test {
  width: 10em;
  stroke: white;
+ position: absolute;
+ top: 30px;
+ right: 30px;
+}
+
+.container {
+  padding: 50px 30px 30px 30px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.wind-speed {
+  grid-column: 3;
+}
+
+.container-header {
+  text-align: center;
+  position: absolute;
+  height: 35px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: rgba(11, 116, 89, 0.3);
+}
+
+.container-header h3 {
+  margin-top: 7px;
 }

@@ -8,9 +8,9 @@ let uvIndex = document.querySelector(".uv-index");
 window.addEventListener("load", () => {
   let long, lat;
   let locationTimezone = document.querySelector(".location-timezone");
-  let windSpeed = document.querySelector(".wind-speed");
+  let windSpeedText = document.querySelector(".wind-speed-text");
   let temperatureDescription = document.querySelector(".temperature-description");
-  let aqiLevel = document.querySelector(".aqi-level");
+  let aqiLevel = document.querySelector(".aqi-level-text");
   let locationState = document.querySelector(".location-state");
 
  
@@ -33,10 +33,10 @@ window.addEventListener("load", () => {
           const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir_full, aqi} = weatherData.data[0];
           console.log(city_name, clouds, temp, timezone, uv, weather);
           locationTimezone.textContent = city_name;
-          temperatureDegree.textContent = temp;
+          temperatureDegree.innerHTML = temp + "&#176;";
           temperatureDescription.textContent = weather.description;
           locationState.textContent = timezone;
-          windSpeed.textContent = "Speed: " + wind_spd.toFixed(1) + "km/h from " + wind_cdir_full;
+          windSpeedText.textContent = "Speed: " + wind_spd.toFixed(1) + "km/h from " + wind_cdir_full;
           aqiCheck(aqi);
           uvCheck(uv.toFixed(1));
           celcius = temp;
@@ -152,13 +152,13 @@ window.addEventListener("load", () => {
 function changeMeasurement() {
   if (currentMeasurement === "celcius") {
     fahrenheit = celcius * 9/5 + 32;
-    temperatureDegree.textContent = Math.round(fahrenheit).toFixed(1);
+    temperatureDegree.innerHTML = Math.round(fahrenheit).toFixed(1) + "&#176;";
     degreeName.textContent = "F"
     currentMeasurement = "fahrenheit"
   }
 
   else if (currentMeasurement === "fahrenheit") {
-    temperatureDegree.textContent = celcius;
+    temperatureDegree.innerHTML = celcius + "&#176;";
     degreeName.textContent = "C"
     currentMeasurement = "celcius"
   }
