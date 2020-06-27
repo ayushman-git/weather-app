@@ -3,7 +3,7 @@ let celcius = null;
 let fahrenheit = null;
 let temperatureDegree = document.querySelector(".temperature-degree");
 let degreeName = document.querySelector(".degree-name");
-let uvIndex = document.querySelector(".uv-index");
+let uvIndex = document.querySelector(".uv-index-text");
 
 window.addEventListener("load", () => {
   let long, lat;

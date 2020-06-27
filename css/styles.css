@@ -38,6 +38,9 @@ body {
   cursor: pointer;
   transition-property: color;
   transition-duration: 0.5s;
+  background: -webkit-linear-gradient(#DAE2F8, #D6A4A4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .degree:hover {
@@ -51,6 +54,7 @@ body {
 .degree h2 {
   font-size: 6rem;
   display: inline-block;
+ 
 }
 
 .temperature-description {
