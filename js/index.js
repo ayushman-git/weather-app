@@ -78,6 +78,15 @@ window.addEventListener("load", () => {
         path: "./assets/weather/cloudy-weather.json"
       });
     }
+    else if(currentIconId === '801' || currentIconId === '802' || currentIconId === '803' || currentIconId === '804'  && currentPod === 'n') {
+      lottie.loadAnimation({
+        container: document.getElementById('test'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: "./assets/weather/night-weather.json"
+      });
+    }
     else if(currentIconId === '500' || currentIconId === '501' || currentIconId === '511' || currentIconId === '520' || currentIconId === '521' || currentIconId === '300' || currentIconId === '301' || currentIconId === '302') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
