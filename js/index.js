@@ -38,7 +38,7 @@ window.addEventListener("load", () => {
           temperatureDegree.innerHTML = temp + "&#176;";
           temperatureDescription.textContent = weather.description;
           locationState.textContent = timezone;
-          windSpeedText.textContent = "Speed: " + wind_spd.toFixed(1) + "km/h from " + wind_cdir_full;
+          windSpeedText.textContent = wind_spd.toFixed(1) + " km/h";
           aqiCheck(aqi);
           uvCheck(uv.toFixed(1));
           celcius = temp;
@@ -53,7 +53,7 @@ window.addEventListener("load", () => {
   function setIcons(weather, pod) {
     const currentIconId = weather.code;
     const currentPod = pod;
-    if (currentIconId === '800' && currentPod === 'd') {
+    if (currentIconId === 800 && currentPod === 'd') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -62,7 +62,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/sun-weather.json"
       });
     }
-    else if(currentIconId === '800' && currentPod === 'n') {
+    else if(currentIconId === 800 && currentPod === 'n') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -71,7 +71,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/night-weather.json"
       });
     }
-    else if(currentIconId === '801' || currentIconId === '802' || currentIconId === '803' || currentIconId === '804'  && currentPod === 'd') {
+    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === 'd') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -80,7 +80,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/cloudy-weather.json"
       });
     }
-    else if(currentIconId === '801' || currentIconId === '802' || currentIconId === '803' || currentIconId === '804'  && currentPod === 'n') {
+    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === 'n') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -89,7 +89,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/night-weather.json"
       });
     }
-    else if(currentIconId === '500' || currentIconId === '501' || currentIconId === '511' || currentIconId === '520' || currentIconId === '521' || currentIconId === '300' || currentIconId === '301' || currentIconId === '302') {
+    else if(currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -98,7 +98,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/rainy-weather.json"
       });
     }
-    else if(currentIconId === '200' || currentIconId === '201' || currentIconId === '202' || currentIconId === '230' || currentIconId === '231' || currentIconId === '232' || currentIconId === '233') {
+    else if(currentIconId === 200 || currentIconId === 201 || currentIconId === 202 || currentIconId === 230 || currentIconId === 231 || currentIconId === 232 || currentIconId === 233) {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -107,7 +107,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/stormy-weather.json"
       });
     }
-    else if(currentIconId === '502' || currentIconId === '522') {
+    else if(currentIconId === 502 || currentIconId === 522) {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -116,7 +116,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/torrential-rain-weather.json"
       });
     }
-    else if(currentIconId === '600' || currentIconId === '601' || currentIconId === '610' || currentIconId === '611' || currentIconId === '621') {
+    else if(currentIconId === 600 || currentIconId === 601 || currentIconId === 610 || currentIconId === 611 || currentIconId === 621) {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -126,7 +126,7 @@ window.addEventListener("load", () => {
       });
     }
     else {
-      console.log("Weather code not matched.")
+      console.log(currentIconId, currentPod)
     }
   }
   
@@ -160,7 +160,7 @@ window.addEventListener("load", () => {
   }
 });
 
-function changeMeasurement() {
+export function changeMeasurement() {
   if (currentMeasurement === "celcius") {
     fahrenheit = celcius * 9/5 + 32;
     temperatureDegree.innerHTML = Math.round(fahrenheit).toFixed(1) + "&#176;";

@@ -8,9 +8,9 @@ body {
   padding: 5%;
   display: grid;
   justify-content: space-evenly;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-gap: 50px;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 40px;
   height: 100vh;
   background: #00bf8f;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to top, #001510, #00bf8f);  /* Chrome 10-25, Safari 5.1-6 */
@@ -21,7 +21,7 @@ body {
 
 .main-container {
   padding: 30px;
-  grid-column: 1/4;
+  grid-column: 1/5;
   position: relative;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 30px;
@@ -86,15 +86,24 @@ body {
 }
 
 .wind-speed {
-  grid-column: 4;
-}
-
-.aqi-level {
   grid-column: 5;
 }
 
-.uv-index {
+.aqi-level {
   grid-column: 6;
+}
+
+.uv-index {
+  grid-column: 7;
+}
+
+.daily-weather {
+  padding: 50px 30px 30px 30px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 30px;
+  grid-column: 1/9;
+  grid-row: 2/6;
 }
 
 .container-header {
@@ -107,7 +116,7 @@ body {
   background-color: rgba(11, 116, 89, 0.3);
 }
 
-.container-header h3 {
+.container-header h4 {
   margin-top: 7px;
 }
 
