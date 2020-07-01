@@ -41,11 +41,277 @@ window.addEventListener("load", () => {
           uvCheck(uv.toFixed(1));
           celcius = temp;
           setIcons(weather, pod);
+
+          return fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&key=ae3720f4b81244fd99737ca75bb804ea`)
+            .then(response => {
+              return response.json();
+            })
+            .then(historicalData => {
+              console.log(historicalData)
+
+              const dayOneMax = historicalData.data[1].max_temp;
+              const dayOneMin = historicalData.data[1].min_temp;
+              const dayOneWeather = historicalData.data[1].weather.code;
+              
+              const dayTwoMax = historicalData.data[2].max_temp;
+              const dayTwoMin = historicalData.data[2].min_temp;
+              const dayTwoWeather = historicalData.data[2].weather.code;
+
+              const dayThreeMax = historicalData.data[3].max_temp;
+              const dayThreeMin = historicalData.data[3].min_temp;
+              const dayThreeWeather = historicalData.data[3].weather.code;
+
+              const dayFourMax = historicalData.data[4].max_temp;
+              const dayFourMin = historicalData.data[4].min_temp;
+              const dayFourWeather = historicalData.data[4].weather.code;
+              console.log(dayOneMax, dayOneMin, dayOneWeather);
+
+              const weatherArray = [dayOneWeather, dayTwoWeather, dayTwoWeather, dayFourWeather];
+
+              for(let iteration = 0; iteration <=3; iteration++) {
+                setDailyIcons(weatherArray[iteration], iteration);
+            }
+             })
         })
     })
   }
   else {
     document.getElementById("location-timezone").innerText = "Allow geolocation access."
+  } 
+
+  function setDailyIcons(weatherArray, iteration) {
+    const currentIconId = weatherArray;
+    console.log(weatherArray, iteration)
+    if (currentIconId === 800) {
+      if (iteration === 0) {
+      lottie.loadAnimation({
+        container: document.querySelector(".daily-icon-one"),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: "./assets/weather/sun-weather.json"
+      });
+    }
+    else if (iteration === 1) {
+      lottie.loadAnimation({
+        container: document.querySelector(".daily-icon-two"),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: "./assets/weather/sun-weather.json"
+      });
+    }
+    else if (iteration === 2) {
+      lottie.loadAnimation({
+        container: document.querySelector(".daily-icon-three"),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: "./assets/weather/sun-weather.json"
+      });
+    }
+    else if (iteration === 3) {
+      lottie.loadAnimation({
+        container: document.querySelector(".daily-icon-four"),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: "./assets/weather/sun-weather.json"
+      });
+    }
+    }
+    
+    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804) {
+        if (iteration === 0) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-one"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/cloudy-weather.json"
+        });
+      }
+      else if (iteration === 1) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-two"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/cloudy-weather.json"
+        });
+      }
+      else if (iteration === 2) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-three"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/cloudy-weather.json"
+        });
+      }
+      else if (iteration === 3) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-four"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/cloudy-weather.json"
+        });
+      }
+      console.log("check")
+    }
+    else if(currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
+      if (iteration === 0) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-one"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/rainy-weather.json"
+        });
+      }
+      else if (iteration === 1) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-two"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/rainy-weather.json"
+        });
+      }
+      else if (iteration === 2) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-three"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/rainy-weather.json"
+        });
+      }
+      else if (iteration === 3) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-four"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/rainy-weather.json"
+        });
+      }
+    }
+    else if(currentIconId === 200 || currentIconId === 201 || currentIconId === 202 || currentIconId === 230 || currentIconId === 231 || currentIconId === 232 || currentIconId === 233) {
+      if (iteration === 0) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-one"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/stormy-weather.json"
+        });
+      }
+      else if (iteration === 1) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-two"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/stormy-weather.json"
+        });
+      }
+      else if (iteration === 2) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-three"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/stormy-weather.json"
+        });
+      }
+      else if (iteration === 3) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-four"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/stormy-weather.json"
+        });
+      }
+    }
+    else if(currentIconId === 502 || currentIconId === 522) {
+      if (iteration === 0) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-one"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/torrential-rain-weather.json"
+        });
+      }
+      else if (iteration === 1) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-two"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/torrential-rain-weather.json"
+        });
+      }
+      else if (iteration === 2) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-three"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/torrential-rain-weather.json"
+        });
+      }
+      else if (iteration === 3) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-four"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/torrential-rain-weather.json"
+        });
+      }
+    }
+    else if(currentIconId === 600 || currentIconId === 601 || currentIconId === 610 || currentIconId === 611 || currentIconId === 621) {
+      if (iteration === 0) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-one"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/light-snowy-weather.json"
+        });
+      }
+      else if (iteration === 1) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-two"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/light-snowy-weather.json"
+        });
+      }
+      else if (iteration === 2) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-three"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/light-snowy-weather.json"
+        });
+      }
+      else if (iteration === 3) {
+        lottie.loadAnimation({
+          container: document.querySelector(".daily-icon-four"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/weather/light-snowy-weather.json"
+        });
+      }
+    }
   }
 
   function setIcons(weather, pod) {
