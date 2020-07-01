@@ -1,9 +1,15 @@
+document.onreadystatechange = function() { 
+  if (apiLoaded === false) { 
+      document.querySelector("body").style.visibility = "hidden"; 
+}}; 
+
 let currentMeasurement = "celcius";
 let celcius = null;
 let fahrenheit = null;
 let temperatureDegree = document.querySelector(".temperature-degree");
 let degreeName = document.querySelector(".degree-name");
 let uvIndex = document.querySelector(".uv-index-text");
+let apiLoaded = false;
 
 window.addEventListener("load", () => {
   let long, lat;
@@ -12,6 +18,14 @@ window.addEventListener("load", () => {
   let temperatureDescription = document.querySelector(".temperature-description");
   let aqiLevel = document.querySelector(".aqi-level-text");
   let locationState = document.querySelector(".location-state");
+  let dailyOneHigh = document.querySelector(".daily-one-high");
+  let dailyOneLow = document.querySelector(".daily-one-low")
+  let dailyTwoHigh = document.querySelector(".daily-two-high");
+  let dailyTwoLow = document.querySelector(".daily-two-low");
+  let dailyThreeHigh = document.querySelector(".daily-three-high");
+  let dailyThreeLow = document.querySelector(".daily-three-low");
+  let dailyFourHigh = document.querySelector(".daily-four-high");
+  let dailyFourLow = document.querySelector(".daily-four-low");
 
  
   // let locationIcon = document.querySelector(".location-icon");
@@ -47,7 +61,9 @@ window.addEventListener("load", () => {
               return response.json();
             })
             .then(historicalData => {
+              apiLoaded = true;
               console.log(historicalData)
+              document.querySelector("body").style.visibility = "visible"; 
 
               const dayOneMax = historicalData.data[1].max_temp;
               const dayOneMin = historicalData.data[1].min_temp;
@@ -64,9 +80,20 @@ window.addEventListener("load", () => {
               const dayFourMax = historicalData.data[4].max_temp;
               const dayFourMin = historicalData.data[4].min_temp;
               const dayFourWeather = historicalData.data[4].weather.code;
-              console.log(dayOneMax, dayOneMin, dayOneWeather);
 
-              const weatherArray = [dayOneWeather, dayTwoWeather, dayTwoWeather, dayFourWeather];
+              const weatherArray = [dayOneWeather, dayTwoWeather, dayThreeWeather, dayFourWeather];
+
+              dailyOneHigh.innerHTML = dayOneMax;
+              dailyOneLow.textContent = dayOneMin;
+
+              dailyTwoHigh.textContent = dayTwoMax;
+              dailyTwoLow.textContent = dayTwoMin;
+
+              dailyThreeHigh.textContent = dayThreeMax;
+              dailyThreeLow.textContent = dayThreeMin;
+
+              dailyFourHigh.textContent = dayFourMax;
+              dailyFourLow.textContent = dayFourMin;
 
               for(let iteration = 0; iteration <=3; iteration++) {
                 setDailyIcons(weatherArray[iteration], iteration);
@@ -81,7 +108,6 @@ window.addEventListener("load", () => {
 
   function setDailyIcons(weatherArray, iteration) {
     const currentIconId = weatherArray;
-    console.log(weatherArray, iteration)
     if (currentIconId === 800) {
       if (iteration === 0) {
       lottie.loadAnimation({
@@ -158,7 +184,6 @@ window.addEventListener("load", () => {
           path: "./assets/weather/cloudy-weather.json"
         });
       }
-      console.log("check")
     }
     else if(currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
       if (iteration === 0) {
@@ -317,6 +342,7 @@ window.addEventListener("load", () => {
   function setIcons(weather, pod) {
     const currentIconId = weather.code;
     const currentPod = pod;
+    console.log(currentIconId, currentPod)
     if (currentIconId === 800 && currentPod === 'd') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
@@ -352,6 +378,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/night-weather.json"
       });
+      console.log("CH")
     }
     else if(currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
       lottie.loadAnimation({

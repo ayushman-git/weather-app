@@ -128,6 +128,13 @@ body {
   grid-row: 3/5;
 }
 
+.high-low-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  line-height: 2em;
+}
+
 .container-header {
   text-align: center;
   position: absolute;
@@ -150,3 +157,5 @@ body {
 .logo path {
   fill: white;
 }
+
+
