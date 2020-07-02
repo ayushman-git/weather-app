@@ -126,6 +126,11 @@ body {
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 30px;
   grid-row: 3/5;
+  transition-property: background-color;
+  transition: 0.5s;
+}
+.daily-container:hover {
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .high-low-container {
@@ -158,4 +163,20 @@ body {
   fill: white;
 }
 
+.day-one-date,
+.day-two-date,
+.day-three-date,
+.day-four-date {
+  display: flex;
+  justify-content: center;
+}
 
+.day-one-des,
+.day-two-des,
+.day-three-des,
+.day-four-des {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  font-size: 0.8em;
+}

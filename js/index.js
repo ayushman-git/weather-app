@@ -10,6 +10,17 @@ let temperatureDegree = document.querySelector(".temperature-degree");
 let degreeName = document.querySelector(".degree-name");
 let uvIndex = document.querySelector(".uv-index-text");
 let apiLoaded = false;
+let dateObj = new Date();
+let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+let currentDay = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
+dateObj.setDate(dateObj.getDate() + 1);
+let dayOne = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
+dateObj.setDate(dateObj.getDate() + 1);
+let dayTwo = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
+dateObj.setDate(dateObj.getDate() + 1);
+let dayThree = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
+dateObj.setDate(dateObj.getDate() + 1);
+let dayFour = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
 
 window.addEventListener("load", () => {
   let long, lat;
@@ -26,6 +37,14 @@ window.addEventListener("load", () => {
   let dailyThreeLow = document.querySelector(".daily-three-low");
   let dailyFourHigh = document.querySelector(".daily-four-high");
   let dailyFourLow = document.querySelector(".daily-four-low");
+  let dayOneDate = document.querySelector(".day-one-date");
+  let dayTwoDate = document.querySelector(".day-two-date");
+  let dayThreeDate = document.querySelector(".day-three-date");
+  let dayFourDate = document.querySelector(".day-four-date");
+  let dayOneDescription = document.querySelector(".day-one-des");
+  let dayTwoDescription = document.querySelector(".day-two-des");
+  let dayThreeDescription = document.querySelector(".day-three-des");
+  let dayFourDescription = document.querySelector(".day-four-des");
 
  
   // let locationIcon = document.querySelector(".location-icon");
@@ -68,20 +87,34 @@ window.addEventListener("load", () => {
               const dayOneMax = historicalData.data[1].max_temp;
               const dayOneMin = historicalData.data[1].min_temp;
               const dayOneWeather = historicalData.data[1].weather.code;
+              const dayOneDes = historicalData.data[1].weather.description;
               
               const dayTwoMax = historicalData.data[2].max_temp;
               const dayTwoMin = historicalData.data[2].min_temp;
               const dayTwoWeather = historicalData.data[2].weather.code;
+              const dayTwoDes = historicalData.data[2].weather.description;
 
               const dayThreeMax = historicalData.data[3].max_temp;
               const dayThreeMin = historicalData.data[3].min_temp;
               const dayThreeWeather = historicalData.data[3].weather.code;
+              const dayThreeDes = historicalData.data[3].weather.description;
 
               const dayFourMax = historicalData.data[4].max_temp;
               const dayFourMin = historicalData.data[4].min_temp;
               const dayFourWeather = historicalData.data[4].weather.code;
+              const dayFourDes = historicalData.data[4].weather.description;
 
               const weatherArray = [dayOneWeather, dayTwoWeather, dayThreeWeather, dayFourWeather];
+
+              dayOneDate.textContent = dayOne;
+              dayTwoDate.textContent = dayTwo;
+              dayThreeDate.textContent = dayThree;
+              dayFourDate.textContent = dayFour;
+
+              dayOneDescription.textContent = dayOneDes;
+              dayTwoDescription.textContent = dayTwoDes;
+              dayThreeDescription.textContent = dayThreeDes;
+              dayFourDescription.textContent = dayFourDes;
 
               dailyOneHigh.innerHTML = dayOneMax;
               dailyOneLow.textContent = dayOneMin;
