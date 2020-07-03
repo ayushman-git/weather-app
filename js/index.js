@@ -114,6 +114,8 @@ window.addEventListener("load", () => {
 
               const weatherArray = [dayOneWeather, dayTwoWeather, dayThreeWeather, dayFourWeather];
 
+              umbrellaIcon(dayOneR, dayTwoR, dayThreeR, dayFourR);
+
               dayOneDate.textContent = dayOne;
               dayTwoDate.textContent = dayTwo;
               dayThreeDate.textContent = dayThree;
@@ -494,6 +496,20 @@ window.addEventListener("load", () => {
     else if(uv <= 7) uvIndex.textContent = `UV Index: High (${uv})`;
     else if(uv <= 10) uvIndex.textContent = `UV Index: Very High (${uv})`;
     else if(uv === 11) uvIndex.textContent = `UV Index: Extreme (${uv})`;
+  }
+
+  function umbrellaIcon(dayOneR, dayTwoR, dayThreeR, dayFourR) {
+    if (dayOneR >= 50) document.querySelector(".rain-one-icon").style.visibility = "visible";
+    else document.querySelector(".rain-one-icon").style.visibility = "hidden";
+
+    if (dayTwoR >= 50) document.querySelector(".rain-two-icon").style.visibility = "visible";
+    else document.querySelector(".rain-one-icon").style.visibility = "hidden";
+
+    if (dayThreeR >= 50) document.querySelector(".rain-three-icon").style.visibility = "visible";
+    else document.querySelector(".rain-one-icon").style.visibility = "hidden";
+
+    if (dayFourR >= 50) document.querySelector(".rain-four-icon").style.visibility = "visible";
+    else document.querySelector(".rain-one-icon").style.visibility = "hidden";
   }
 });
 

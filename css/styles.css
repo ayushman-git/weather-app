@@ -196,3 +196,13 @@ body {
   justify-content: center;
   padding: 0.5em;
 }
+
+.rain-one-icon,
+.rain-two-icon,
+.rain-three-icon,
+.rain-four-icon {
+  width: 1em;
+  height: 1em;
+  background-image: url("/assets/icons/umbrella.svg");
+  margin-left: 1em;
+}
