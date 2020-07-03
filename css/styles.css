@@ -19,6 +19,13 @@ body {
   font-family: sans-serif;
 }
 
+::-moz-selection { /* Code for Firefox */
+  background: transparent;
+}
+::selection {
+  background: transparent;
+ }
+
 .main-container {
   padding: 30px;
   grid-column: 1/5;
@@ -29,6 +36,8 @@ body {
   transition-property: background-color;
   transition: 0.5s;
   box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.75);
+  min-width: 620px;
+  min-height: 250px;
 }
 .main-container:hover {
   background-color: rgba(255, 255, 255, 0.3);
@@ -126,6 +135,8 @@ body {
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 30px;
   grid-row: 3/5;
+  min-width: 150px;
+  min-height: 270px;
   transition-property: background-color;
   transition: 0.5s;
 }
@@ -179,4 +190,9 @@ body {
   justify-content: center;
   padding: 1em;
   font-size: 0.8em;
+}
+.rain-container {
+  display: flex;
+  justify-content: center;
+  padding: 0.5em;
 }

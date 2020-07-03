@@ -45,6 +45,10 @@ window.addEventListener("load", () => {
   let dayTwoDescription = document.querySelector(".day-two-des");
   let dayThreeDescription = document.querySelector(".day-three-des");
   let dayFourDescription = document.querySelector(".day-four-des");
+  let dayOneRain = document.querySelector(".day-one-rain");
+  let dayTwoRain = document.querySelector(".day-two-rain");
+  let dayThreeRain = document.querySelector(".day-three-rain");
+  let dayFourRain = document.querySelector(".day-four-rain");
 
  
   // let locationIcon = document.querySelector(".location-icon");
@@ -84,25 +88,29 @@ window.addEventListener("load", () => {
               console.log(historicalData)
               document.querySelector("body").style.visibility = "visible"; 
 
-              const dayOneMax = historicalData.data[1].max_temp;
-              const dayOneMin = historicalData.data[1].min_temp;
-              const dayOneWeather = historicalData.data[1].weather.code;
-              const dayOneDes = historicalData.data[1].weather.description;
+              const dayOneMax = historicalData.data[0].max_temp;
+              const dayOneMin = historicalData.data[0].min_temp;
+              const dayOneWeather = historicalData.data[0].weather.code;
+              const dayOneDes = historicalData.data[0].weather.description;
+              const dayOneR = historicalData.data[0].pop;
               
-              const dayTwoMax = historicalData.data[2].max_temp;
-              const dayTwoMin = historicalData.data[2].min_temp;
-              const dayTwoWeather = historicalData.data[2].weather.code;
-              const dayTwoDes = historicalData.data[2].weather.description;
+              const dayTwoMax = historicalData.data[1].max_temp;
+              const dayTwoMin = historicalData.data[1].min_temp;
+              const dayTwoWeather = historicalData.data[1].weather.code;
+              const dayTwoDes = historicalData.data[1].weather.description;
+              const dayTwoR = historicalData.data[1].pop;
 
-              const dayThreeMax = historicalData.data[3].max_temp;
-              const dayThreeMin = historicalData.data[3].min_temp;
-              const dayThreeWeather = historicalData.data[3].weather.code;
-              const dayThreeDes = historicalData.data[3].weather.description;
+              const dayThreeMax = historicalData.data[2].max_temp;
+              const dayThreeMin = historicalData.data[2].min_temp;
+              const dayThreeWeather = historicalData.data[2].weather.code;
+              const dayThreeDes = historicalData.data[2].weather.description;
+              const dayThreeR = historicalData.data[2].pop;
 
-              const dayFourMax = historicalData.data[4].max_temp;
-              const dayFourMin = historicalData.data[4].min_temp;
-              const dayFourWeather = historicalData.data[4].weather.code;
-              const dayFourDes = historicalData.data[4].weather.description;
+              const dayFourMax = historicalData.data[3].max_temp;
+              const dayFourMin = historicalData.data[3].min_temp;
+              const dayFourWeather = historicalData.data[3].weather.code;
+              const dayFourDes = historicalData.data[3].weather.description;
+              const dayFourR = historicalData.data[3].pop;
 
               const weatherArray = [dayOneWeather, dayTwoWeather, dayThreeWeather, dayFourWeather];
 
@@ -116,17 +124,22 @@ window.addEventListener("load", () => {
               dayThreeDescription.textContent = dayThreeDes;
               dayFourDescription.textContent = dayFourDes;
 
-              dailyOneHigh.innerHTML = dayOneMax;
-              dailyOneLow.textContent = dayOneMin;
+              dailyOneHigh.innerHTML = dayOneMax + "&#176;";
+              dailyOneLow.innerHTML = dayOneMin + "&#176;";
 
-              dailyTwoHigh.textContent = dayTwoMax;
-              dailyTwoLow.textContent = dayTwoMin;
+              dailyTwoHigh.innerHTML = dayTwoMax + "&#176;";
+              dailyTwoLow.innerHTML = dayTwoMin + "&#176;";
 
-              dailyThreeHigh.textContent = dayThreeMax;
-              dailyThreeLow.textContent = dayThreeMin;
+              dailyThreeHigh.innerHTML = dayThreeMax + "&#176;";
+              dailyThreeLow.innerHTML = dayThreeMin + "&#176;";
 
-              dailyFourHigh.textContent = dayFourMax;
-              dailyFourLow.textContent = dayFourMin;
+              dailyFourHigh.innerHTML = dayFourMax + "&#176;";
+              dailyFourLow.innerHTML = dayFourMin + "&#176;";
+
+              dayOneRain.textContent = dayOneR + "%";
+              dayTwoRain.textContent = dayTwoR + "%";
+              dayThreeRain.textContent = dayThreeR + "%";
+              dayFourRain.textContent = dayFourR + "%";
 
               for(let iteration = 0; iteration <=3; iteration++) {
                 setDailyIcons(weatherArray[iteration], iteration);
