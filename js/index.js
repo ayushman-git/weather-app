@@ -67,13 +67,14 @@ window.addEventListener("load", () => {
         })
         .then(weatherData => {
           console.log(weatherData);
-          const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir_full, aqi} = weatherData.data[0];
+          const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir, aqi} = weatherData.data[0];
           console.log(city_name, clouds, temp, timezone, uv, weather);
           locationTimezone.textContent = city_name;
           temperatureDegree.innerHTML = temp + "&#176;";
           temperatureDescription.textContent = weather.description;
           locationState.textContent = timezone;
           windSpeedText.textContent = wind_spd.toFixed(1) + " km/h";
+          windDirection(wind_cdir);
           aqiCheck(aqi);
           uvCheck(uv.toFixed(1));
           celcius = temp;
@@ -471,31 +472,31 @@ window.addEventListener("load", () => {
   
   function aqiCheck(aqi) {
     if(aqi <= 50) {
-      aqiLevel.textContent = `AQ Index: Good (${aqi})`; 
+      aqiLevel.textContent = `Good (${aqi})`; 
     }
     else if(aqi <= 100) {
-      aqiLevel.textContent = `AQ Index: Satisfactory (${aqi})`; 
+      aqiLevel.textContent = `Satisfactory (${aqi})`; 
     }
     else if(aqi <= 200) {
-      aqiLevel.textContent = `AQ Index: Moderate (${aqi})`; 
+      aqiLevel.textContent = `Moderate (${aqi})`; 
     }
     else if(aqi <= 300) {
-      aqiLevel.textContent = `AQ Index: Poor (${aqi})`; 
+      aqiLevel.textContent = `Poor (${aqi})`; 
     }
     else if(aqi <= 400) {
-      aqiLevel.textContent = `AQ Index: Very Poor (${aqi})`; 
+      aqiLevel.textContent = `Very Poor (${aqi})`; 
     }
     else if(aqi <= 500) {
-      aqiLevel.textContent = `AQ Index: Severe (${aqi})`; 
+      aqiLevel.textContent = `Severe (${aqi})`; 
     }
   }
 
   function uvCheck(uv) {
-    if(uv <= 2) uvIndex.textContent = `UV Index: Low (${uv})`;
-    else if(uv <= 5) uvIndex.textContent = `UV Index: Moderate (${uv})`;
-    else if(uv <= 7) uvIndex.textContent = `UV Index: High (${uv})`;
-    else if(uv <= 10) uvIndex.textContent = `UV Index: Very High (${uv})`;
-    else if(uv === 11) uvIndex.textContent = `UV Index: Extreme (${uv})`;
+    if(uv <= 2) uvIndex.textContent = `Low (${uv})`;
+    else if(uv <= 5) uvIndex.textContent = `Moderate (${uv})`;
+    else if(uv <= 7) uvIndex.textContent = `High (${uv})`;
+    else if(uv <= 10) uvIndex.textContent = `Very High (${uv})`;
+    else if(uv === 11) uvIndex.textContent = `Extreme (${uv})`;
   }
 
   function umbrellaIcon(dayOneR, dayTwoR, dayThreeR, dayFourR) {
@@ -510,6 +511,103 @@ window.addEventListener("load", () => {
 
     if (dayFourR >= 50) document.querySelector(".rain-four-icon").style.visibility = "visible";
     else document.querySelector(".rain-one-icon").style.visibility = "hidden";
+  }
+
+  function windDirection(wind_cdir) {
+    if(wind_cdir) {
+      if(wind_cdir === "E") {
+        lottie.loadAnimation({
+          container: document.querySelector(".wind-speed-animation"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/wind.json"
+        });
+      }
+      else if(wind_cdir === "S") {
+        lottie.loadAnimation({
+          container: document.querySelector(".wind-speed-animation"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/wind.json"
+        });
+        document.querySelector(".wind-speed-animation").style.transform = "rotate(90deg)"
+      }
+      else if(wind_cdir === "W") {
+        lottie.loadAnimation({
+          container: document.querySelector(".wind-speed-animation"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/wind.json"
+        });
+        document.querySelector(".wind-speed-animation").style.transform = "rotate(180deg)"
+      }
+      else if(wind_cdir === "N") {
+        lottie.loadAnimation({
+          container: document.querySelector(".wind-speed-animation"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/wind.json"
+        });
+        document.querySelector(".wind-speed-animation").style.transform = "rotate(-90deg)"
+      }
+      else if(wind_cdir === "S") {
+        lottie.loadAnimation({
+          container: document.querySelector(".wind-speed-animation"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/wind.json"
+        });
+        document.querySelector(".wind-speed-animation").style.transform = "rotate(90deg)"
+      }
+      else if(wind_cdir === "ESE") {
+        lottie.loadAnimation({
+          container: document.querySelector(".wind-speed-animation"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/wind.json"
+        });
+        document.querySelector(".wind-speed-animation").style.transform = "rotate(45deg)"
+      }
+      else if(wind_cdir === "NWN") {
+        lottie.loadAnimation({
+          container: document.querySelector(".wind-speed-animation"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/wind.json"
+        });
+        document.querySelector(".wind-speed-animation").style.transform = "rotate(225deg)"
+      }
+      else if(wind_cdir === "ENE") {
+        lottie.loadAnimation({
+          container: document.querySelector(".wind-speed-animation"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/wind.json"
+        });
+        document.querySelector(".wind-speed-animation").style.transform = "rotate(-45deg)"
+      }
+     else if(wind_cdir === "WSW") {
+        lottie.loadAnimation({
+          container: document.querySelector(".wind-speed-animation"),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "./assets/wind.json"
+        });
+        document.querySelector(".wind-speed-animation").style.transform = "rotate(135deg)"
+      }
+      else {
+        console.log("Wrong direction");
+      }
+    }
   }
 });
 
