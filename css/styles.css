@@ -211,7 +211,9 @@ body {
 .day-one-date,
 .day-two-date,
 .day-three-date,
-.day-four-date {
+.day-four-date,
+.aqi-level-text,
+.aqi-level-digit {
   display: flex;
   justify-content: center;
 }
@@ -240,3 +242,8 @@ body {
   background-image: url("/assets/icons/umbrella.svg");
   margin-left: 1em;
 }
+
+.aqi-level-digit {
+  font-size: 2em;
+}
+

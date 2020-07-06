@@ -49,6 +49,7 @@ window.addEventListener("load", () => {
   let dayTwoRain = document.querySelector(".day-two-rain");
   let dayThreeRain = document.querySelector(".day-three-rain");
   let dayFourRain = document.querySelector(".day-four-rain");
+  let aqiLevelDigit = document.querySelector(".aqi-level-digit");
 
  
   // let locationIcon = document.querySelector(".location-icon");
@@ -472,19 +473,29 @@ window.addEventListener("load", () => {
   
   function aqiCheck(aqi) {
     if(aqi <= 50) {
-      aqiLevel.textContent = `Good (${aqi})`; 
+      aqiLevelDigit.textContent = aqi;
+      // aqiLevelDigit.style.color = "#83FE84"
+      aqiLevel.textContent = `Good`; 
     }
     else if(aqi <= 100) {
-      aqiLevel.textContent = `Satisfactory (${aqi})`; 
+      aqiLevelDigit.textContent = aqi;
+      // aqiLevelDigit.style.color = "#83FE84"
+      aqiLevel.textContent = `Satisfactory`; 
     }
     else if(aqi <= 200) {
-      aqiLevel.textContent = `Moderate (${aqi})`; 
+      aqiLevelDigit.textContent = aqi;
+      // aqiLevelDigit.style.color = "#FFFA5D"
+      aqiLevel.textContent = `Moderate`; 
     }
     else if(aqi <= 300) {
-      aqiLevel.textContent = `Poor (${aqi})`; 
+      aqiLevelDigit.textContent = aqi;
+      // aqiLevelDigit.style.color = "#FFB870"
+      aqiLevel.textContent = `Poor`; 
     }
     else if(aqi <= 400) {
-      aqiLevel.textContent = `Very Poor (${aqi})`; 
+      aqiLevelDigit.textContent = aqi;
+      // aqiLevelDigit.style.color = "#FFB870"
+      aqiLevel.textContent = `Very Poor`; 
     }
     else if(aqi <= 500) {
       aqiLevel.textContent = `Severe (${aqi})`; 
@@ -504,13 +515,13 @@ window.addEventListener("load", () => {
     else document.querySelector(".rain-one-icon").style.visibility = "hidden";
 
     if (dayTwoR >= 50) document.querySelector(".rain-two-icon").style.visibility = "visible";
-    else document.querySelector(".rain-one-icon").style.visibility = "hidden";
+    else document.querySelector(".rain-two-icon").style.visibility = "hidden";
 
     if (dayThreeR >= 50) document.querySelector(".rain-three-icon").style.visibility = "visible";
-    else document.querySelector(".rain-one-icon").style.visibility = "hidden";
+    else document.querySelector(".rain-three-icon").style.visibility = "hidden";
 
     if (dayFourR >= 50) document.querySelector(".rain-four-icon").style.visibility = "visible";
-    else document.querySelector(".rain-one-icon").style.visibility = "hidden";
+    else document.querySelector(".rain-four-icon").style.visibility = "hidden";
   }
 
   function windDirection(wind_cdir) {
