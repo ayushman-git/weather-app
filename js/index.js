@@ -564,7 +564,7 @@ window.addEventListener("load", () => {
         });
         document.querySelector(".wind-speed-animation").style.transform = "rotate(90deg)"
       }
-      else if(wind_cdir === "ESE") {
+      else if(wind_cdir === "ESE" || wind_cdir === "SE" || wind_cdir === "SSE") {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
           renderer: 'svg',
@@ -574,7 +574,7 @@ window.addEventListener("load", () => {
         });
         document.querySelector(".wind-speed-animation").style.transform = "rotate(45deg)"
       }
-      else if(wind_cdir === "NWN") {
+      else if(wind_cdir === "NW" || wind_cdir === "WNW" || wind_cdir === "NNW") {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
           renderer: 'svg',
@@ -584,7 +584,7 @@ window.addEventListener("load", () => {
         });
         document.querySelector(".wind-speed-animation").style.transform = "rotate(225deg)"
       }
-      else if(wind_cdir === "ENE") {
+      else if(wind_cdir === "ENE" || wind_cdir === "NE" || wind_cdir === "NNE") {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
           renderer: 'svg',
@@ -594,7 +594,7 @@ window.addEventListener("load", () => {
         });
         document.querySelector(".wind-speed-animation").style.transform = "rotate(-45deg)"
       }
-     else if(wind_cdir === "WSW") {
+     else if(wind_cdir === "WSW" ||wind_cdir === "SW" || wind_cdir === "SSW") {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
           renderer: 'svg',
