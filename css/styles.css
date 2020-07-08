@@ -213,7 +213,9 @@ body {
 .day-three-date,
 .day-four-date,
 .aqi-level-text,
-.aqi-level-digit {
+.aqi-level-digit,
+.uv-index-text,
+.uv-index-digit {
   display: flex;
   justify-content: center;
 }
@@ -243,7 +245,8 @@ body {
   margin-left: 1em;
 }
 
-.aqi-level-digit {
+.aqi-level-digit,
+.uv-index-digit {
   font-size: 2em;
 }
 

@@ -50,6 +50,7 @@ window.addEventListener("load", () => {
   let dayThreeRain = document.querySelector(".day-three-rain");
   let dayFourRain = document.querySelector(".day-four-rain");
   let aqiLevelDigit = document.querySelector(".aqi-level-digit");
+  let uvIndexDigit = document.querySelector(".uv-index-digit");
 
  
   // let locationIcon = document.querySelector(".location-icon");
@@ -503,11 +504,28 @@ window.addEventListener("load", () => {
   }
 
   function uvCheck(uv) {
-    if(uv <= 2) uvIndex.textContent = `Low (${uv})`;
-    else if(uv <= 5) uvIndex.textContent = `Moderate (${uv})`;
-    else if(uv <= 7) uvIndex.textContent = `High (${uv})`;
-    else if(uv <= 10) uvIndex.textContent = `Very High (${uv})`;
-    else if(uv === 11) uvIndex.textContent = `Extreme (${uv})`;
+    uv = Math.round(uv);
+    if(uv <= 2) {
+      uvIndex.textContent = `Low`;
+      uvIndexDigit.textContent = uv;
+    }
+    else if(uv <= 5) {
+       uvIndex.textContent = `Moderate`;
+       uvIndexDigit.textContent = uv;
+    }
+    else if(uv <= 7) {
+      uvIndex.textContent = `High`;
+      uvIndexDigit.textContent = uv;
+    }
+    else if(uv <= 10) {
+      uvIndex.textContent = `Very High`;
+      uvIndexDigit.textContent = uv;
+    }
+
+    else if(uv === 11) {
+      uvIndex.textContent = `Extreme`;
+      uvIndexDigit.textContent = uv;
+    }
   }
 
   function umbrellaIcon(dayOneR, dayTwoR, dayThreeR, dayFourR) {
