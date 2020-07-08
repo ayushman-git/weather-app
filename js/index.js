@@ -75,7 +75,7 @@ window.addEventListener("load", () => {
           temperatureDegree.innerHTML = temp + "&#176;";
           temperatureDescription.textContent = weather.description;
           locationState.textContent = timezone;
-          windSpeedText.textContent = wind_spd.toFixed(1) + " km/h";
+          windSpeedText.textContent = Math.round(wind_spd);
           windDirection(wind_cdir);
           aqiCheck(aqi);
           uvCheck(uv.toFixed(1));

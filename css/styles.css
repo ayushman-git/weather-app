@@ -105,13 +105,17 @@ body {
 }
 
 .wind-speed-animation{
-  width: 1.5em;
+  left: 0;
+  top: 50%;
+  opacity: 0.2;
+  position: absolute;
+  height: 2.5em;
 }
 
 .wind-speed-container{
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .aqi-level {
@@ -215,9 +219,11 @@ body {
 .aqi-level-text,
 .aqi-level-digit,
 .uv-index-text,
-.uv-index-digit {
+.uv-index-digit,
+.wind-speed-text {
   display: flex;
   justify-content: center;
+  padding: 2px;
 }
 
 .day-one-des,
@@ -246,7 +252,13 @@ body {
 }
 
 .aqi-level-digit,
-.uv-index-digit {
+.uv-index-digit,
+.wind-speed-text {
   font-size: 2em;
 }
 
+.wind-speed-m{
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+}
