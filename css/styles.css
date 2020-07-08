@@ -131,13 +131,8 @@ body {
 }
 
 .sun-rise-set{
-  grid-column: 5;
+  grid-column: 5/7;
   grid-row: 2;
-}
-
-.pressure {
-  grid-row: 2;
-  grid-column: 6;
 }
 
 .visibility-distance{
@@ -220,7 +215,8 @@ body {
 .aqi-level-digit,
 .uv-index-text,
 .uv-index-digit,
-.wind-speed-text {
+.wind-speed-text,
+.humidity-text {
   display: flex;
   justify-content: center;
   padding: 2px;
@@ -253,7 +249,8 @@ body {
 
 .aqi-level-digit,
 .uv-index-digit,
-.wind-speed-text {
+.wind-speed-text,
+.humidity-text {
   font-size: 2em;
 }
 

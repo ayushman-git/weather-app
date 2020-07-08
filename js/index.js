@@ -51,6 +51,7 @@ window.addEventListener("load", () => {
   let dayFourRain = document.querySelector(".day-four-rain");
   let aqiLevelDigit = document.querySelector(".aqi-level-digit");
   let uvIndexDigit = document.querySelector(".uv-index-digit");
+  let humidityText = document.querySelector(".humidity-text");
 
  
   // let locationIcon = document.querySelector(".location-icon");
@@ -69,16 +70,19 @@ window.addEventListener("load", () => {
         })
         .then(weatherData => {
           console.log(weatherData);
-          const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir, aqi} = weatherData.data[0];
+          const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir, aqi, rh} = weatherData.data[0];
           console.log(city_name, clouds, temp, timezone, uv, weather);
+
           locationTimezone.textContent = city_name;
           temperatureDegree.innerHTML = temp + "&#176;";
           temperatureDescription.textContent = weather.description;
           locationState.textContent = timezone;
           windSpeedText.textContent = Math.round(wind_spd);
+          humidityText.textContent = Math.round(rh);
+
           windDirection(wind_cdir);
           aqiCheck(aqi);
-          uvCheck(uv.toFixed(1));
+          uvCheck(uv,pod);
           celcius = temp;
           setIcons(weather, pod);
 
@@ -502,8 +506,9 @@ window.addEventListener("load", () => {
       aqiLevel.textContent = `Severe (${aqi})`; 
     }
   }
-
-  function uvCheck(uv) {
+ 
+  function uvCheck(uv,pod) {
+    if(pod === "d") {
     uv = Math.round(uv);
     if(uv <= 2) {
       uvIndex.textContent = `Low`;
@@ -526,6 +531,11 @@ window.addEventListener("load", () => {
       uvIndex.textContent = `Extreme`;
       uvIndexDigit.textContent = uv;
     }
+  } 
+  else {
+    uvIndex.textContent = `Night`;
+    uvIndexDigit.textContent = '-';
+  }
   }
 
   function umbrellaIcon(dayOneR, dayTwoR, dayThreeR, dayFourR) {
