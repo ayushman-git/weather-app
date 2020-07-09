@@ -51,6 +51,7 @@ window.addEventListener("load", () => {
   let dayFourRain = document.querySelector(".day-four-rain");
   let aqiLevelDigit = document.querySelector(".aqi-level-digit");
   let uvIndexDigit = document.querySelector(".uv-index-digit");
+  let humidityDigit = document.querySelector(".humidity-digit");
   let humidityText = document.querySelector(".humidity-text");
 
  
@@ -78,8 +79,9 @@ window.addEventListener("load", () => {
           temperatureDescription.textContent = weather.description;
           locationState.textContent = timezone;
           windSpeedText.textContent = Math.round(wind_spd);
-          humidityText.textContent = Math.round(rh);
+          humidityDigit.textContent = Math.round(rh);
 
+          checkHumidity(rh);
           windDirection(wind_cdir);
           aqiCheck(aqi);
           uvCheck(uv,pod);
@@ -646,6 +648,24 @@ window.addEventListener("load", () => {
       else {
         console.log("Wrong direction");
       }
+    }
+  }
+
+  function checkHumidity(rh) {
+    if (rh <= 15) {
+      humidityText.textContent = "Very Dry";
+    }
+    else if (rh <= 30) {
+      humidityText.textContent = "Dry Air";
+    }
+    else if (rh <= 50) {
+      humidityText.textContent = "Comfortable";
+    }
+    else if (rh <= 80) {
+      humidityText.textContent = "Humid";
+    }
+    else if (rh <= 100) {
+      humidityText.textContent = "Very Humid";
     }
   }
 });

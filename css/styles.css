@@ -112,7 +112,8 @@ body {
   height: 2.5em;
 }
 
-.wind-speed-container{
+.wind-speed-container,
+.humidity-container{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -216,6 +217,7 @@ body {
 .uv-index-text,
 .uv-index-digit,
 .wind-speed-text,
+.humidity-digit,
 .humidity-text {
   display: flex;
   justify-content: center;
@@ -250,11 +252,12 @@ body {
 .aqi-level-digit,
 .uv-index-digit,
 .wind-speed-text,
-.humidity-text {
+.humidity-digit {
   font-size: 2em;
 }
 
-.wind-speed-m{
+.wind-speed-m,
+.humidity-m{
   display: flex;
   align-items: center;
   font-size: 0.8em;
