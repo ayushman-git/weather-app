@@ -53,6 +53,8 @@ window.addEventListener("load", () => {
   let uvIndexDigit = document.querySelector(".uv-index-digit");
   let humidityDigit = document.querySelector(".humidity-digit");
   let humidityText = document.querySelector(".humidity-text");
+  let sunriseTime = document.querySelector(".sunrise-time");
+  let sunsetTime = document.querySelector(".sunset-time");
 
  
   // let locationIcon = document.querySelector(".location-icon");
@@ -71,7 +73,7 @@ window.addEventListener("load", () => {
         })
         .then(weatherData => {
           console.log(weatherData);
-          const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir, aqi, rh} = weatherData.data[0];
+          const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir, aqi, rh, sunrise, sunset} = weatherData.data[0];
           console.log(city_name, clouds, temp, timezone, uv, weather);
 
           locationTimezone.textContent = city_name;
@@ -80,6 +82,8 @@ window.addEventListener("load", () => {
           locationState.textContent = timezone;
           windSpeedText.textContent = Math.round(wind_spd);
           humidityDigit.textContent = Math.round(rh);
+          sunriseTime.textContent = sunrise;
+          sunsetTime.textContent = sunset;
 
           const sunriseAnimation = lottie.loadAnimation({
             container: document.querySelector(".sunrise-animation"),
@@ -88,8 +92,15 @@ window.addEventListener("load", () => {
             autoplay: true,
             path: "./assets/sunrise.json"
           });
+          const sunsetAnimation = lottie.loadAnimation({
+            container: document.querySelector(".sunset-animation"),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: "./assets/sunrise.json"
+          });
           sunriseAnimation.setSpeed(0.2);
-          sunriseAnimation;
+          sunsetAnimation.setSpeed(-0.2);
 
           checkHumidity(rh);
           windDirection(wind_cdir);

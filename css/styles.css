@@ -263,6 +263,13 @@ body {
   font-size: 0.8em;
 }
 
-.sunrise-animation {
+.sunrise-animation,
+.sunset-animation {
   width: 50px;
+}
+
+.sun-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
