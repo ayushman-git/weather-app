@@ -81,6 +81,16 @@ window.addEventListener("load", () => {
           windSpeedText.textContent = Math.round(wind_spd);
           humidityDigit.textContent = Math.round(rh);
 
+          const sunriseAnimation = lottie.loadAnimation({
+            container: document.querySelector(".sunrise-animation"),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: "./assets/sunrise.json"
+          });
+          sunriseAnimation.setSpeed(0.2);
+          sunriseAnimation;
+
           checkHumidity(rh);
           windDirection(wind_cdir);
           aqiCheck(aqi);
