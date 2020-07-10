@@ -75,13 +75,13 @@ window.addEventListener("load", () => {
         })
         .then(weatherData => {
           console.log(weatherData);
-          const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir, aqi, rh, sunrise, sunset, vis} = weatherData.data[0];
+          const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir, aqi, rh, sunrise, sunset, vis, country_code} = weatherData.data[0];
           console.log(city_name, clouds, temp, timezone, uv, weather);
 
           locationTimezone.textContent = city_name;
           temperatureDegree.innerHTML = temp + "&#176;";
           temperatureDescription.textContent = weather.description;
-          locationState.textContent = timezone;
+          locationState.textContent = country_code;
           windSpeedText.textContent = Math.round(wind_spd);
           humidityDigit.textContent = Math.round(rh);
           sunriseTime.textContent = sunrise;
@@ -451,6 +451,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/cloudy-weather.json"
       });
+      document.body.style.background = "linear-gradient(45deg, #3a7bd5, #3a6073)";
     }
     else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === 'n') {
       lottie.loadAnimation({
