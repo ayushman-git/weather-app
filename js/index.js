@@ -424,7 +424,6 @@ window.addEventListener("load", () => {
   function setIcons(weather, pod) {
     const currentIconId = weather.code;
     const currentPod = pod;
-    console.log(currentIconId, currentPod)
     if (currentIconId === 800 && currentPod === 'd') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
@@ -443,7 +442,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/night-weather.json"
       });
     }
-    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === 'd') {
+    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === "d") {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -451,9 +450,8 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/cloudy-weather.json"
       });
-      document.body.style.background = "linear-gradient(45deg, #3a7bd5, #3a6073)";
     }
-    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === 'n') {
+    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === "n") {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -461,7 +459,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/night-weather.json"
       });
-      console.log("CH")
+      document.body.style.background = "linear-gradient(135deg, #1a1a1a, #000000)";
     }
     else if(currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
       lottie.loadAnimation({
