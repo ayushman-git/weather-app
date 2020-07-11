@@ -21,6 +21,7 @@ dateObj.setDate(dateObj.getDate() + 1);
 let dayThree = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
 dateObj.setDate(dateObj.getDate() + 1);
 let dayFour = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
+let currentTimeZone = (dateObj.getTimezoneOffset()/60) *-1;
 
 window.addEventListener("load", () => {
   let long, lat;
@@ -84,8 +85,8 @@ window.addEventListener("load", () => {
           locationState.textContent = "/"+country_code;
           windSpeedText.textContent = Math.round(wind_spd);
           humidityDigit.textContent = Math.round(rh);
-          sunriseTime.textContent =  sunrise;
-          sunsetTime.textContent = sunset;
+          sunriseTime.textContent =  dateSplit(sunrise) + "am";
+          sunsetTime.textContent = dateSplit(sunset) + "pm";
           visibilityDigit.textContent = vis;
           cloudsDigit.textContent = clouds;
 
@@ -445,7 +446,7 @@ window.addEventListener("load", () => {
       });
       document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
     }
-    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === 'd') {
+    else if((currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804)  && currentPod === 'd') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -454,8 +455,9 @@ window.addEventListener("load", () => {
         path: "./assets/weather/cloudy-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #0575E6, #021B79)";
+      console.log("802 d")
     }
-    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === 'n') {
+    else if((currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804)  && currentPod === 'n') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -715,4 +717,29 @@ function changeMeasurement() {
     degreeName.textContent = "C"
     currentMeasurement = "celcius"
   }
+}
+
+function dateSplit(timeToSplit) {
+  let splitted = timeToSplit.split(":");
+  let apiHour = parseInt(splitted[0]);
+  let apiMinute = parseInt(splitted[1]);
+  let splittedTimeZone = currentTimeZone.toString().split(".");
+  let hour = parseInt(splittedTimeZone[0]);
+  let min = parseInt(splittedTimeZone[1]);
+  min = (min*10)*60/100
+
+  apiHour = apiHour + hour;
+  apiMinute = apiMinute + min;
+  if(apiMinute >= 60) {
+    apiHour++;
+    apiMinute = apiMinute - 60;
+    if(apiMinute < 10) {
+      apiMinute = "0"+apiMinute;
+    }
+  }
+
+  if(apiHour > 12) {
+    apiHour = apiHour - 12;
+  }
+  return apiHour + ":" + apiMinute;
 }
