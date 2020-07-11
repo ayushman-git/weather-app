@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +16,7 @@ body {
   height: 100vh;
   background: linear-gradient(135deg,#000000, #000000);
   color: white;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 ::-moz-selection { /* Code for Firefox */
@@ -65,11 +67,13 @@ body {
   width: 1.6em;
 }
 .temperature-description {
+  font-weight: 900;
   font-size: 3rem;
 }
 .location-city-state h1 {
+  font-weight: 400;
   display: inline-block;
-  font-size: 2em;
+  font-size: 1.8em;
 }
 
 #test {
@@ -191,7 +195,8 @@ body {
 }
 
 .container-header h4 {
-  margin-top: 6px;
+  font-weight: 400;
+  margin-top: 5px;
   font-size: 14px;
 }
 

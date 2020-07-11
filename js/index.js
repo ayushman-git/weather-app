@@ -81,10 +81,10 @@ window.addEventListener("load", () => {
           locationTimezone.textContent = city_name;
           temperatureDegree.innerHTML = temp + "&#176;";
           temperatureDescription.textContent = weather.description;
-          locationState.textContent = country_code;
+          locationState.textContent = "/"+country_code;
           windSpeedText.textContent = Math.round(wind_spd);
           humidityDigit.textContent = Math.round(rh);
-          sunriseTime.textContent = sunrise;
+          sunriseTime.textContent =  sunrise;
           sunsetTime.textContent = sunset;
           visibilityDigit.textContent = vis;
           cloudsDigit.textContent = clouds;
@@ -422,9 +422,9 @@ window.addEventListener("load", () => {
   }
 
   function setIcons(weather, pod) {
-    const currentIconId = weather.code;
-    const currentPod = pod;
-    console.log(currentIconId, currentPod)
+    const currentIconId = parseInt(weather.code);
+    const currentPod = pod.toString();
+    console.log(typeof currentIconId, typeof currentPod)
     if (currentIconId === 800 && currentPod === 'd') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
@@ -445,7 +445,7 @@ window.addEventListener("load", () => {
       });
       document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
     }
-    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === "d") {
+    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === 'd') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
@@ -455,7 +455,7 @@ window.addEventListener("load", () => {
       });
       document.body.style.background = "linear-gradient(135deg, #0575E6, #021B79)";
     }
-    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === "n") {
+    else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === 'n') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
         renderer: 'svg',
