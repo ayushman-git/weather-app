@@ -424,6 +424,7 @@ window.addEventListener("load", () => {
   function setIcons(weather, pod) {
     const currentIconId = weather.code;
     const currentPod = pod;
+    console.log(currentIconId, currentPod)
     if (currentIconId === 800 && currentPod === 'd') {
       lottie.loadAnimation({
         container: document.getElementById('test'),
@@ -432,6 +433,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/sun-weather.json"
       });
+      document.body.style.background = "linear-gradient(135deg, #0575E6, #021B79)";
     }
     else if(currentIconId === 800 && currentPod === 'n') {
       lottie.loadAnimation({
@@ -441,6 +443,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/night-weather.json"
       });
+      document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
     }
     else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === "d") {
       lottie.loadAnimation({
@@ -450,6 +453,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/cloudy-weather.json"
       });
+      document.body.style.background = "linear-gradient(135deg, #0575E6, #021B79)";
     }
     else if(currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804  && currentPod === "n") {
       lottie.loadAnimation({
@@ -459,7 +463,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/night-weather.json"
       });
-      document.body.style.background = "linear-gradient(135deg, #1a1a1a, #000000)";
+      document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
     }
     else if(currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
       lottie.loadAnimation({
@@ -469,6 +473,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/rainy-weather.json"
       });
+      document.body.style.background = "linear-gradient(135deg, #07519c, #0e1418)";
     }
     else if(currentIconId === 200 || currentIconId === 201 || currentIconId === 202 || currentIconId === 230 || currentIconId === 231 || currentIconId === 232 || currentIconId === 233) {
       lottie.loadAnimation({
@@ -478,6 +483,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/stormy-weather.json"
       });
+      document.body.style.background = "linear-gradient(135deg, #0d4680, #06080a)";
     }
     else if(currentIconId === 502 || currentIconId === 522) {
       lottie.loadAnimation({
@@ -487,6 +493,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/torrential-rain-weather.json"
       });
+      document.body.style.background = "linear-gradient(135deg, #0d4680, #06080a)";
     }
     else if(currentIconId === 600 || currentIconId === 601 || currentIconId === 610 || currentIconId === 611 || currentIconId === 621) {
       lottie.loadAnimation({
@@ -496,6 +503,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/light-snowy-weather.json"
       });
+      document.body.style.background = "linear-gradient(135deg, #e4e5e6, #00416a)";
     }
     else {
       console.log(currentIconId, currentPod)

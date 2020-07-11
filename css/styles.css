@@ -12,11 +12,7 @@ body {
   grid-template-rows: repeat(4, 1fr);
   grid-gap: 40px;
   height: 100vh;
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-  /* background: #00bf8f; 
-  background: -webkit-linear-gradient(to top, #001510, #00bf8f); 
-  background: linear-gradient(to top, #001510, #00bf8f); */
-  
+  background: linear-gradient(135deg,#000000, #000000);
   color: white;
   font-family: sans-serif;
 }
@@ -199,15 +195,6 @@ body {
   font-size: 14px;
 }
 
-.logo {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.logo path {
-  fill: white;
-}
-
 .day-one-date,
 .day-two-date,
 .day-three-date,
@@ -279,3 +266,4 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
 }
+
