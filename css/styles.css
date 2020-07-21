@@ -49,7 +49,7 @@ body {
 }
 
 .degree:hover {
-  color: #a9d8ff;
+  color: #000000;
 }
 
 .degree span {
@@ -84,7 +84,6 @@ body {
 }
 
 .container {
-  padding: 40px 30px 30px 30px;
   position: relative;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 30px;
@@ -106,6 +105,32 @@ body {
   opacity: 0.2;
   position: absolute;
   height: 2.5em;
+}
+
+.wind-direction {
+  position: absolute;
+  font-size: 9px;
+}
+
+.wind-east {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5%;
+}
+.wind-west {
+  top: 50%;
+  transform: translateY(-50%);
+  left: 5%;
+}
+.wind-north {
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.wind-south {
+  bottom: -50%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .wind-speed-container,
@@ -156,13 +181,29 @@ body {
 }
 
 .daily-icon {
-  width: 5em;
+  width: 6vw;
   margin: auto;
 }
 
+.small-wrapper {
+  position: relative;
+  top:60%;
+  transform: translateY(-60%);
+}
+
+.small-wrapperS {
+  position: relative;
+  top:70%;
+  transform: translateY(-70%);
+}
+
+.daily-wrapper{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 .daily-container {
-  padding: 30px 30px 30px 30px;
   position: relative;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 30px;
@@ -214,7 +255,6 @@ body {
 .cloudsDigit {
   display: flex;
   justify-content: center;
-  padding: 2px;
 }
 
 .day-one-des,
@@ -224,9 +264,10 @@ body {
   display: flex;
   justify-content: center;
   padding: 1em;
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 .rain-container {
+  font-size: 0.9em;
   display: flex;
   justify-content: center;
   padding: 0.5em;

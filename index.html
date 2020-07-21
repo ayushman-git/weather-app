@@ -29,35 +29,46 @@
       <h4>Wind Speed</h4>
     </div>
     <div class="wind-speed-animation"></div>
-    <div class="wind-speed-container">
-      <div class="wind-speed-text">Hi</div>
-      <div class="wind-speed-m">km/h</div>
+    <div class="small-wrapper">
+      <div class="wind-east wind-direction">E</div>
+      <div class="wind-west wind-direction">W</div>
+      <div class="wind-north wind-direction">N</div>
+      <div class="wind-south wind-direction">S</div>
+      <div class="wind-speed-container">
+        <div class="wind-speed-text">Hi</div>
+        <div class="wind-speed-m">km/h</div>
+      </div>
     </div>
   </div>
   <div class="container aqi-level">
     <div class="container-header">
       <h4>AQI Level</h4>
     </div>
-    <div class="aqi-level-text">Hi</div>
-    <div class="aqi-level-digit"></div>
-
+    <div class="small-wrapperS">
+      <div class="aqi-level-text">Hi</div>
+      <div class="aqi-level-digit"></div>
+    </div>
   </div>
   <div class="container uv-index">
     <div class="container-header">
       <h4>UV Index</h4>
     </div>
-    <div class="uv-index-text">Hi</div>
-    <div class="uv-index-digit">Hi</div>
+    <div class="small-wrapperS">
+      <div class="uv-index-text">Hi</div>
+      <div class="uv-index-digit">Hi</div>
+    </div>
   </div>
 
   <div class="container humidity">
     <div class="container-header">
       <h4>Humidity</h4>
     </div>
-    <div class="humidity-text">Hi</div>
-    <div class="humidity-container">
-      <div class="humidity-digit">Hi</div>
-      <div class="humidity-m">%</div>
+    <div class="small-wrapperS">
+      <div class="humidity-text">Hi</div>
+      <div class="humidity-container">
+        <div class="humidity-digit">Hi</div>
+        <div class="humidity-m">%</div>
+      </div>
     </div>
   </div>
 
@@ -65,11 +76,13 @@
     <div class="container-header">
       <h4>Sunrise / Sunset</h4>
     </div>
-    <div class="sun-container">
-      <div class="sunrise-animation"></div>
-      <div class="sunrise-time">Hi</div>
-      <div class="sunset-animation"></div>
-      <div class="sunset-time">Hi</div>
+    <div class="small-wrapper">
+      <div class="sun-container">
+        <div class="sunrise-animation"></div>
+        <div class="sunrise-time">Hi</div>
+        <div class="sunset-animation"></div>
+        <div class="sunset-time">Hi</div>
+      </div>
     </div>
   </div>
 
@@ -77,9 +90,11 @@
     <div class="container-header">
       <h4>Visibility</h4>
     </div>
-    <div class="visibility-container">
-      <div class="visibility-digit">Hi</div>
-      <div class="visibility-m">km</div>
+    <div class="small-wrapper">
+      <div class="visibility-container">
+        <div class="visibility-digit">Hi</div>
+        <div class="visibility-m">km</div>
+      </div>
     </div>
   </div>
 
@@ -87,94 +102,107 @@
     <div class="container-header">
       <h4>Clouds</h4>
     </div>
-    <div class="clouds-container">
-      <div class="clouds-digit">Hi</div>
-      <div class="clouds-m">%</div>
+    <div class="small-wrapper">
+      <div class="clouds-container">
+        <div class="clouds-digit">Hi</div>
+        <div class="clouds-m">%</div>
+      </div>
     </div>
   </div>
 
   <div class="daily-weather-one daily-container">
-    <div class="daily-icon-one daily-icon"></div>
-    <div class="day-one-date"></div>
-    <div class="day-one-des"></div>
-    <div class="high-low-container">
-      <div>
-        <b>High</b>
-        <div class="daily-one-high"></div>
+    <div class="daily-wrapper">
+      <div class="daily-icon-one daily-icon"></div>
+      <div class="day-one-date"></div>
+      <div class="day-one-des"></div>
+      <div class="high-low-container">
+        <div>
+          <b>High</b>
+          <div class="daily-one-high"></div>
+        </div>
+        |
+        <div>
+          <b>Low</b>
+          <div class="daily-one-low"></div>
+        </div>
       </div>
-      |
-      <div>
-        <b>Low</b>
-        <div class="daily-one-low"></div>
+      <div class="rain-container">Rain chance: &nbsp;
+        <span class="day-one-rain"></span>
+        <div class="rain-one-icon"></div>
       </div>
-    </div>
-    <div class="rain-container">Rain chance: &nbsp;
-      <span class="day-one-rain"></span>
-      <div class="rain-one-icon"></div>
-    </div>
-  </div>
-  <div class="daily-weather-two daily-container">
-    <div class="daily-icon-two daily-icon"></div>
-    <div class="day-two-date"></div>
-    <div class="day-two-des"></div>
-    <div class="high-low-container">
-      <div>
-        <b>High</b>
-        <div class="daily-two-high"></div>
-      </div>
-      |
-      <div>
-        <b>Low</b>
-        <div class="daily-two-low"></div>
-      </div>
-    </div>
-    <div class="rain-container">Rain chance: &nbsp;
-      <span class="day-two-rain"></span>
-      <div class="rain-two-icon"></div>
-    </div>
-  </div>
-  <div class="daily-weather-three daily-container">
-    <div class="daily-icon-three daily-icon"> </div>
-    <div class="day-three-date"></div>
-    <div class="day-three-des"></div>
-    <div class="high-low-container">
-      <div>
-        <b>High</b>
-        <div class="daily-three-high"></div>
-      </div>
-      |
-      <div>
-        <b>Low</b>
-        <div class="daily-three-low"></div>
-      </div>
-    </div>
-    <div class="rain-container">Rain chance: &nbsp;
-      <span class="day-three-rain"></span>
-      <div class="rain-three-icon"></div>
-    </div>
-  </div>
-  <div class="daily-weather-four daily-container">
-    <div class="daily-icon-four daily-icon"> </div>
-    <div class="day-four-date"></div>
-    <div class="day-four-des"></div>
-    <div class="high-low-container">
-      <div>
-        <b>High</b>
-        <div class="daily-four-high"></div>
-      </div>
-      |
-      <div>
-        <b>Low</b>
-        <div class="daily-four-low"></div>
-      </div>
-    </div>
-    <div class="rain-container">Rain chance: &nbsp;
-      <span class="day-four-rain"></span>
-      <div class="rain-four-icon"></div>
     </div>
   </div>
 
-  <div class="footer"><span>Designed & coded by </span><a href="https://github.com/ayushman-git" target="_blank">Ayushman</a></div>
+  <div class="daily-weather-two daily-container">
+    <div class="daily-wrapper">
+      <div class="daily-icon-two daily-icon"></div>
+      <div class="day-two-date"></div>
+      <div class="day-two-des"></div>
+      <div class="high-low-container">
+        <div>
+          <b>High</b>
+          <div class="daily-two-high"></div>
+        </div>
+        |
+        <div>
+          <b>Low</b>
+          <div class="daily-two-low"></div>
+        </div>
+      </div>
+      <div class="rain-container">Rain chance: &nbsp;
+        <span class="day-two-rain"></span>
+        <div class="rain-two-icon"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="daily-weather-three daily-container">
+    <div class="daily-wrapper">
+      <div class="daily-icon-three daily-icon"> </div>
+      <div class="day-three-date"></div>
+      <div class="day-three-des"></div>
+      <div class="high-low-container">
+        <div>
+          <b>High</b>
+          <div class="daily-three-high"></div>
+        </div>
+        |
+        <div>
+          <b>Low</b>
+          <div class="daily-three-low"></div>
+        </div>
+      </div>
+      <div class="rain-container">Rain chance: &nbsp;
+        <span class="day-three-rain"></span>
+        <div class="rain-three-icon"></div>
+      </div>
+    </div>
+  </div>
+  <div class="daily-weather-four daily-container">
+    <div class="daily-wrapper">
+      <div class="daily-icon-four daily-icon"> </div>
+      <div class="day-four-date"></div>
+      <div class="day-four-des"></div>
+      <div class="high-low-container">
+        <div>
+          <b>High</b>
+          <div class="daily-four-high"></div>
+        </div>
+        |
+        <div>
+          <b>Low</b>
+          <div class="daily-four-low"></div>
+        </div>
+      </div>
+      <div class="rain-container">Rain chance: &nbsp;
+        <span class="day-four-rain"></span>
+        <div class="rain-four-icon"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span>Designed & coded by </span><a href="https://github.com/ayushman-git"
+      target="_blank">Ayushman</a></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.6.10/lottie.js" type="text/javascript"></script>
   <script type="text/javascript" src="./js/index.js"></script>
