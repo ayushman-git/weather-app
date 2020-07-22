@@ -77,7 +77,7 @@ window.addEventListener("load", () => {
         })
         .then(weatherData => {
           console.log(weatherData);
-          const { city_name, clouds, temp, timezone, uv, weather, pod, wind_spd, wind_cdir, aqi, rh, sunrise, sunset, vis, country_code } = weatherData.data[0];
+          const { city_name, clouds, temp, ob_time, uv, weather, pod, wind_spd, wind_cdir, aqi, rh, sunrise, sunset, vis, country_code } = weatherData.data[0];
 
           locationTimezone.textContent = city_name;
           temperatureDegree.innerHTML = temp + "&#176;";
@@ -534,7 +534,7 @@ window.addEventListener("load", () => {
     else if (aqi <= 400) {
       aqiLevelDigit.textContent = aqi;
       // aqiLevelDigit.style.color = "#FFB870"
-      aqiLevel.textContent = `Very Poor`;
+      aqiLevel.textContent = `Bad`;
     }
     else if (aqi <= 500) {
       aqiLevel.textContent = `Severe (${aqi})`;
@@ -557,7 +557,7 @@ window.addEventListener("load", () => {
         uvIndexDigit.textContent = uv;
       }
       else if (uv <= 10) {
-        uvIndex.textContent = `Very High`;
+        uvIndex.textContent = `Inflated`;
         uvIndexDigit.textContent = uv;
       }
 
@@ -685,10 +685,10 @@ window.addEventListener("load", () => {
 
   function checkHumidity(rh) {
     if (rh <= 15) {
-      humidityText.textContent = "Very Dry";
+      humidityText.textContent = "Shrivel";
     }
     else if (rh <= 30) {
-      humidityText.textContent = "Dry Air";
+      humidityText.textContent = "Dry";
     }
     else if (rh <= 50) {
       humidityText.textContent = "Comfortable";
@@ -697,7 +697,7 @@ window.addEventListener("load", () => {
       humidityText.textContent = "Humid";
     }
     else if (rh <= 100) {
-      humidityText.textContent = "Very Humid";
+      humidityText.textContent = "Muggy";
     }
   }
 });
