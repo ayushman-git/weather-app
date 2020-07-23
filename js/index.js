@@ -24,6 +24,8 @@ dateObj.setDate(dateObj.getDate() + 1);
 let dayFour = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
 let currentTimeZone = (dateObj.getTimezoneOffset() / 60) * -1;
 
+let cloudBackground = document.querySelector(".clouds-images");
+
 window.addEventListener("load", () => {
   let long, lat;
   let locationTimezone = document.querySelector(".location-timezone");
@@ -454,6 +456,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/cloudy-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #0575E6, #021B79)";
+      cloudBackground.style.display = "inline-block";
     }
     else if ((currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804) && currentPod === 'n') {
       lottie.loadAnimation({
@@ -464,6 +467,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/night-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
+      cloudBackground.style.display = "inline-block";
     }
     else if (currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
       lottie.loadAnimation({
