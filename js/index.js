@@ -25,6 +25,7 @@ let dayFour = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
 let currentTimeZone = (dateObj.getTimezoneOffset() / 60) * -1;
 
 let cloudBackground = document.querySelector(".clouds-images");
+let rainBackground = document.querySelector(".rain-background");
 
 window.addEventListener("load", () => {
   let long, lat;
@@ -478,6 +479,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/rainy-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #07519c, #0e1418)";
+      rainBackground.style.display = "inline-block";
     }
     else if (currentIconId === 200 || currentIconId === 201 || currentIconId === 202 || currentIconId === 230 || currentIconId === 231 || currentIconId === 232 || currentIconId === 233) {
       lottie.loadAnimation({
@@ -488,6 +490,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/stormy-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #0d4680, #06080a)";
+      rainBackground.style.display = "inline-block";
     }
     else if (currentIconId === 502 || currentIconId === 522) {
       lottie.loadAnimation({
@@ -498,6 +501,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/torrential-rain-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #0d4680, #06080a)";
+      rainBackground.style.display = "inline-block";
     }
     else if (currentIconId === 600 || currentIconId === 601 || currentIconId === 610 || currentIconId === 611 || currentIconId === 621) {
       lottie.loadAnimation({
@@ -766,3 +770,31 @@ function dateSplit(timeToSplit) {
     return apiHour + ":" + apiMinute;
   }
 }
+
+
+var makeItRain = function () {
+  //clear out everything
+  $('.rain').empty();
+
+  var increment = 0;
+  var drops = "";
+  var backDrops = "";
+
+  while (increment < 100) {
+    //couple random numbers to use for various randomizations
+    //random number between 98 and 1
+    var randoHundo = (Math.floor(Math.random() * (98 - 1 + 1) + 1));
+    //random number between 5 and 2
+    var randoFiver = (Math.floor(Math.random() * (5 - 2 + 1) + 2));
+    //increment
+    increment += randoFiver;
+    //add in a new raindrop with various randomizations to certain CSS properties
+    drops += '<div class="drop" style="left: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
+    backDrops += '<div class="drop" style="right: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
+  }
+
+  $('.rain.front-row').append(drops);
+  $('.rain.back-row').append(backDrops);
+}
+
+makeItRain();
