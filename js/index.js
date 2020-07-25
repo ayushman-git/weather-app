@@ -26,6 +26,7 @@ let currentTimeZone = (dateObj.getTimezoneOffset() / 60) * -1;
 
 let cloudBackground = document.querySelector(".clouds-images");
 let rainBackground = document.querySelector(".rain-background");
+let snowBackground = document.querySelector(".snow-background");
 
 window.addEventListener("load", () => {
   let long, lat;
@@ -512,6 +513,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/light-snowy-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #e4e5e6, #00416a)";
+      snowBackground.style.display = "inline-block";
     }
     else {
       console.log(currentIconId, currentPod)
@@ -798,3 +800,12 @@ var makeItRain = function () {
 }
 
 makeItRain();
+
+const makeStars = function() {
+  let parentDiv = document.querySelector(".night-stars");
+  let starsDiv = document.createElement("div");
+  parentDiv.appendChild(starsDiv)
+  starsDiv.classList.add("stars");
+}
+
+makeStars();
