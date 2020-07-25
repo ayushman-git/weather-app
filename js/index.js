@@ -468,8 +468,8 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/night-weather.json"
       });
-      document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
-      cloudBackground.style.display = "inline-block";
+      document.body.style.background = "linear-gradient(135deg, #07519c, #0e1418)";
+      rainBackground.style.display = "inline-block";
     }
     else if (currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
       lottie.loadAnimation({
