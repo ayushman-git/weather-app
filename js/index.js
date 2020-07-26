@@ -24,10 +24,6 @@ dateObj.setDate(dateObj.getDate() + 1);
 let dayFour = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
 let currentTimeZone = (dateObj.getTimezoneOffset() / 60) * -1;
 
-let cloudBackground = document.querySelector(".clouds-images");
-let rainBackground = document.querySelector(".rain-background");
-let snowBackground = document.querySelector(".snow-background");
-
 window.addEventListener("load", () => {
   let long, lat;
   let locationTimezone = document.querySelector(".location-timezone");
@@ -458,7 +454,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/cloudy-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #0575E6, #021B79)";
-      cloudBackground.style.display = "inline-block";
+      document.querySelector(".cloud-images").style.display = "inline-block";
     }
     else if ((currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804) && currentPod === 'n') {
       lottie.loadAnimation({
@@ -469,7 +465,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/night-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
-      cloudBackground.style.display = "inline-block";
+      document.querySelector(".cloud-images").style.display = "inline-block";
     }
     else if (currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
       lottie.loadAnimation({
@@ -480,7 +476,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/rainy-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #07519c, #0e1418)";
-      rainBackground.style.display = "inline-block";
+      makeItRain();
     }
     else if (currentIconId === 200 || currentIconId === 201 || currentIconId === 202 || currentIconId === 230 || currentIconId === 231 || currentIconId === 232 || currentIconId === 233) {
       lottie.loadAnimation({
@@ -491,7 +487,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/stormy-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #0d4680, #06080a)";
-      rainBackground.style.display = "inline-block";
+      makeItRain();
     }
     else if (currentIconId === 502 || currentIconId === 522) {
       lottie.loadAnimation({
@@ -502,7 +498,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/torrential-rain-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #0d4680, #06080a)";
-      rainBackground.style.display = "inline-block";
+      makeItRain();
     }
     else if (currentIconId === 600 || currentIconId === 601 || currentIconId === 610 || currentIconId === 611 || currentIconId === 621) {
       lottie.loadAnimation({
@@ -513,7 +509,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/light-snowy-weather.json"
       });
       document.body.style.background = "linear-gradient(135deg, #e4e5e6, #00416a)";
-      snowBackground.style.display = "inline-block";
+      makeSnow();
     }
     else {
       console.log(currentIconId, currentPod)
@@ -799,13 +795,29 @@ var makeItRain = function () {
   $('.rain.back-row').append(backDrops);
 }
 
-makeItRain();
-
-const makeStars = function() {
+const makeStars = function () {
   let parentDiv = document.querySelector(".night-stars");
-  let starsDiv = document.createElement("div");
-  parentDiv.appendChild(starsDiv)
-  starsDiv.classList.add("stars");
+  let starsDiv = []
+  for (let i = 0; i <= 100; i++) {
+    let randomSize = Math.floor(Math.random() * 3) + 2;
+    starsDiv[i] = document.createElement("div");
+    parentDiv.appendChild(starsDiv[i])
+    starsDiv[i].id = "star-" + i;
+    starsDiv[i].classList.add("stars");
+    starsDiv[i].style.top = Math.floor(Math.random() * screen.height) + "px";
+    starsDiv[i].style.left = Math.floor(Math.random() * screen.width) + "px";
+    starsDiv[i].style.height = randomSize + "px";
+    starsDiv[i].style.width = randomSize + "px";
+    starsDiv[i].classList.add("starsShine")
+  }
+  console.log(starsDiv)
 }
 
-makeStars();
+const makeSnow = function() {
+  let parentDiv = document.querySelector(".snow-background");
+  for(let i = 0;i <= 200; i++) {
+    let snowDiv = document.createElement("div");
+    snowDiv.classList.add("snow");
+    parentDiv.appendChild(snowDiv);
+  }
+}

@@ -40,6 +40,54 @@ body {
 .main-container:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
+@media only screen and (max-width: 600px) {
+  body {
+    grid-gap: 8px;
+  }
+  .main-container {
+    grid-column: 1/9;
+    grid-row: 1/2;
+  }
+  .wind-speed {
+    grid-column: 1/9;
+    grid-row: 2/3;
+  }
+  .aqi-level {
+    grid-column: 3/5;
+    grid-row: 2/3;
+  }
+  .uv-index {
+    grid-column: 5/7;
+    grid-row: 2/3;
+  }
+  .humidity {
+    grid-column: 7/9;
+    grid-row: 2/3;
+  }
+  .daily-weather-one {
+    grid-column: 1/5;
+    grid-row: 3/5;
+  }
+  .daily-weather-two {
+    grid-column: 5/9;
+    grid-row: 3/5;
+  }
+  .daily-weather-three {
+    display: none;
+  }
+  .daily-weather-four {
+    display: none;
+  }
+  .sun-rise-set{
+    display: none;
+  }
+  .visibility-distance {
+    display: none;
+  }
+  .clouds {
+    display: none;
+  }
+}
 
 .degree {
   color: #ffffff;
@@ -123,7 +171,7 @@ body {
   left: 5%;
 }
 .wind-north {
-  top: -30%;
+  top: -20%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -330,19 +378,11 @@ body {
   font-size: 0.8em;
   opacity: 0.8;
 }
-
-.clouds-images {
+/*---------------------------------------------- Cloud Effect-------------------------------------------- */
+.cloud-images {
   display: none;
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-  pointer-events: none;
 }
-
-.clouds-images img {
+.background-animations img {
   position: absolute;
   bottom: 0;
   max-width: 100%;
@@ -363,12 +403,7 @@ body {
 }
 
 /*---------------------------------------------- Rain Effect-------------------------------------------- */
-.rain-background {
-  display: none;
-}
-.body-div,
-.snow-background,
-.night-stars {
+.background-animations {
   position: absolute;
   width: 100%;
   height: 100vh;
@@ -391,10 +426,6 @@ body {
   z-index: 1;
   bottom: 60px;
   opacity: 0.5;
-}
-
-.body-div.back-row-toggle .rain.back-row {
-  display: block;
 }
 
 .drop {
@@ -449,10 +480,6 @@ body {
   opacity: 1;
   transform: scale(0);
   animation: splat 0.5s linear infinite;
-  display: none;
-}
-
-.body-div.splat-toggle .splat {
   display: block;
 }
 
@@ -475,19 +502,7 @@ body {
   }
 }
 
-.body-div.single-toggle .drop {
-  display: none;
-}
-
-.body-div.single-toggle .drop:nth-child(10) {
-  display: block;
-}
-
 /*---------------------------------------------- Snow Effect-------------------------------------------- */
-
-.snow-background {
-  display: none;
-}
 
 @function random_range($min, $max) {
   $rand: random();
@@ -533,9 +548,39 @@ body {
 }
 
 .stars {
-  display: none;
-  width: 100px;
-  height: 100px;
+  position: absolute;
   border-radius: 50%;
   background-color: white;
+  opacity: 1;
+}
+
+.starsShine {
+  animation: stars 1s ease infinite;
+}
+.starsMove {
+  animation: move 10s ease infinite;
+}
+
+@keyframes stars {
+  0% {
+    opacity: 1;
+  }
+  25%,75% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes move {
+  0% {
+    opacity: 1;
+  }
+  25%,75% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
 }
