@@ -443,6 +443,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/night-weather.json"
       });
+      makeStars();
       document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
     }
     else if ((currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804) && currentPod === 'd') {
@@ -464,6 +465,7 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/night-weather.json"
       });
+      makeStars();
       document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
       document.querySelector(".cloud-images").style.display = "inline-block";
     }
@@ -796,10 +798,10 @@ var makeItRain = function () {
 }
 
 const makeStars = function () {
-  let parentDiv = document.querySelector(".night-stars");
+  let parentDiv = document.querySelector(".night-sky");
   let starsDiv = []
-  for (let i = 0; i <= 100; i++) {
-    let randomSize = Math.floor(Math.random() * 3) + 2;
+  for (let i = 0; i <= 200; i++) {
+    let randomSize = Math.floor(Math.random() * 2) + 1;
     starsDiv[i] = document.createElement("div");
     parentDiv.appendChild(starsDiv[i])
     starsDiv[i].id = "star-" + i;
@@ -808,7 +810,6 @@ const makeStars = function () {
     starsDiv[i].style.left = Math.floor(Math.random() * screen.width) + "px";
     starsDiv[i].style.height = randomSize + "px";
     starsDiv[i].style.width = randomSize + "px";
-    starsDiv[i].classList.add("starsShine")
   }
   console.log(starsDiv)
 }
