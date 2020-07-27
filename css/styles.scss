@@ -557,9 +557,9 @@ body {
 
 @for $i from 0 through 200 {
   #star-#{$i} {
-    animation: stars random(5) + 1 + s random(9000) + ms ease infinite;
+    animation: stars random(3) + 1 + s random(9000) + ms ease infinite;
     box-shadow:0px 0px random(5) + px white; 
-    animation:move 3s ease infinite;
+    // animation:move 3s ease infinite;
   }
 }
 
