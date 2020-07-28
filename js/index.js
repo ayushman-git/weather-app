@@ -444,7 +444,7 @@ window.addEventListener("load", () => {
         path: "./assets/weather/night-weather.json"
       });
       makeStars();
-      document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
+      document.body.style.background = "linear-gradient(135deg, #1b1b1b, #000000)";
     }
     else if ((currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804) && currentPod === 'd') {
       lottie.loadAnimation({
@@ -466,8 +466,9 @@ window.addEventListener("load", () => {
         path: "./assets/weather/night-weather.json"
       });
       makeStars();
-      document.body.style.background = "linear-gradient(135deg, #434343, #000000)";
+      document.body.style.background = "linear-gradient(135deg, #1b1b1b, #000000)";
       document.querySelector(".cloud-images").style.display = "inline-block";
+      document.querySelector(".cloud-images").style.opacity = "0.3";
     }
     else if (currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
       lottie.loadAnimation({

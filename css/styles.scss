@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;900&display=swap");
 
 * {
   margin: 0;
@@ -14,17 +14,18 @@ body {
   grid-template-rows: repeat(4, 1fr);
   grid-gap: 40px;
   height: 100vh;
-  background: linear-gradient(135deg,#000000, #000000);
+  background: linear-gradient(135deg, #000000, #000000);
   color: white;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-::-moz-selection { /* Code for Firefox */
+::-moz-selection {
+  /* Code for Firefox */
   background: transparent;
 }
 ::selection {
   background: transparent;
- }
+}
 
 .main-container {
   padding: 30px;
@@ -35,7 +36,7 @@ body {
   border-radius: 30px;
   transition-property: background-color;
   transition: 0.5s;
-  box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.75);
 }
 .main-container:hover {
   background-color: rgba(255, 255, 255, 0.3);
@@ -78,7 +79,7 @@ body {
   .daily-weather-four {
     display: none;
   }
-  .sun-rise-set{
+  .sun-rise-set {
     display: none;
   }
   .visibility-distance {
@@ -108,7 +109,6 @@ body {
 .degree h2 {
   font-size: 6vw;
   display: inline-block;
- 
 }
 .location-icon {
   width: 1.6em;
@@ -124,11 +124,11 @@ body {
 }
 
 #test {
- width: 13vw;
- stroke: white;
- position: absolute;
- top: 30px;
- right: 30px;
+  width: 13vw;
+  stroke: white;
+  position: absolute;
+  top: 30px;
+  right: 30px;
 }
 
 .container {
@@ -147,10 +147,10 @@ body {
   grid-column: 5;
 }
 
-.wind-speed-animation{
+.wind-speed-animation {
   position: absolute;
   left: 0;
-  top:40%;
+  top: 40%;
   opacity: 0.2;
   height: 2.5em;
 }
@@ -184,7 +184,7 @@ body {
 .wind-speed-container,
 .humidity-container,
 .visibility-container,
-.clouds-container{
+.clouds-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -198,16 +198,16 @@ body {
   grid-column: 7;
 }
 
-.humidity{
+.humidity {
   grid-column: 8;
 }
 
-.sun-rise-set{
+.sun-rise-set {
   grid-column: 5/7;
   grid-row: 2;
 }
 
-.visibility-distance{
+.visibility-distance {
   grid-row: 2;
   grid-column: 8;
 }
@@ -235,17 +235,17 @@ body {
 
 .small-wrapper {
   position: relative;
-  top:60%;
+  top: 60%;
   transform: translateY(-60%);
 }
 
 .small-wrapperS {
   position: relative;
-  top:70%;
+  top: 70%;
   transform: translateY(-70%);
 }
 
-.daily-wrapper{
+.daily-wrapper {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -342,7 +342,7 @@ body {
 .wind-speed-m,
 .humidity-m,
 .visibility-m,
-.clouds-m{
+.clouds-m {
   display: flex;
   align-items: center;
   font-size: 0.8em;
@@ -365,7 +365,7 @@ body {
   right: 1vw;
 }
 
-.footer a{
+.footer a {
   text-decoration: none;
   color: white;
 }
@@ -393,7 +393,8 @@ body {
     opacity: 0;
     transform: scale(1);
   }
-  25%,75% {
+  25%,
+  75% {
     opacity: 0.1;
   }
   100% {
@@ -540,7 +541,7 @@ body {
       #{percentage($random-yoyo-time)} {
         transform: translate($random-x-end, $random-yoyo-y) scale($random-scale);
       }
-      
+
       to {
         transform: translate($random-x-end-yoyo, 100vh) scale($random-scale);
       }
@@ -557,14 +558,55 @@ body {
 
 @for $i from 0 through 200 {
   #star-#{$i} {
-    animation: stars random(3) + 1 + s random(9000) + ms ease infinite;
-    box-shadow:0px 0px random(5) + px white; 
-    // animation:move 3s ease infinite;
+    $randomId: random(3);
+    $randomFl: random(20);
+    @if $randomId == 1 {
+    animation: stars random(6) + 2 + s random(9000) + ms ease infinite,
+      move-1 random(40) + 15 + s random(9000) + ms infinite;
+    }
+    @else if $randomId == 2 {
+      animation: stars random(6) + 2 + s random(9000) + ms ease infinite,
+      move-2 random(60) + 80 + s random(9000) + ms infinite;
+    }
+    @else if $randomId == 3 {
+      animation: stars random(6) + 2 + s random(9000) + ms ease infinite,
+      move-3 random(60) + 80 + s random(9000) + ms infinite;
+    }
+    @if $randomFl == 1 {
+      animation: stars random(6) + 2 + s random(9000) + ms ease infinite,
+      move-2 random(60) + 80 + s random(9000) + ms infinite,
+      flick 0.3s ease infinite;
+    }
+    box-shadow: 0px 0px random(5) + px white;
+  }
+}
+
+@keyframes flick {
+  50% {
+    box-shadow: 0px 0px 5px 1px white;
   }
 }
 
 @keyframes stars {
   50% {
     opacity: 0;
+  }
+}
+
+@keyframes move-1 {
+  50% {
+    transform: translate3d(50px, 50px, 0px);
+  }
+}
+
+@keyframes move-2 {
+  50% {
+    transform: rotate(360deg) translate3d(-50px, 50px, 0px);
+  }
+}
+
+@keyframes move-3 {
+  50% {
+    transform: rotate(-360deg) translate3d(-50px, -50px, 0px);
   }
 }
