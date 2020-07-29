@@ -815,11 +815,20 @@ const makeStars = function () {
   console.log(starsDiv)
 }
 
-const makeSnow = function() {
+const makeSnow = function () {
   let parentDiv = document.querySelector(".snow-background");
-  for(let i = 0;i <= 200; i++) {
+  for (let i = 0; i <= 200; i++) {
     let snowDiv = document.createElement("div");
     snowDiv.classList.add("snow");
     parentDiv.appendChild(snowDiv);
   }
 }
+
+// const responsive = function () {
+//   if (document.body.scrollWidth < 1000) {
+//     document.body.style.gridTemplateColumns = "repeat(4, 1fr)"
+//   }
+//   console.log(document.body.scrollWidth);
+// }
+
+// responsive();
