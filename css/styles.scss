@@ -70,6 +70,7 @@ body {
 }
 
 .temperature {
+  display: inline-block;
   position: relative;
   bottom: 0;
 }
@@ -311,9 +312,40 @@ body {
 
 .sunrise-animation,
 .sunset-animation {
-  width: 50px;
+  width: 2em;
+}
+.sunrise-animation > img {
+  animation: sun-rotate 40s linear infinite;
+}
+.sunset-animation > img {
+  animation: moon-move 10s linear infinite;
+}
+@keyframes moon-move {
+  50% {
+    transform: rotateZ(20deg);
+  }
+}
+@keyframes sun-rotate {
+  0%{
+    transform: rotateZ(0);
+  }
+  50% {
+    transform: rotateZ(180deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
 }
 
+.am-pm {
+  padding-left: 0.3em;
+  font-size: 0.8em;
+}
+.sunrise-time,
+.sunset-time {
+  display: flex;
+  align-items: center;
+}
 .sun-container {
   display: flex;
   flex-direction: row;

@@ -85,27 +85,18 @@ window.addEventListener("load", () => {
           locationState.textContent = "/" + country_code;
           windSpeedText.textContent = Math.round(wind_spd);
           humidityDigit.textContent = Math.round(rh);
-          sunriseTime.textContent = dateSplit(sunrise) + "am";
-          sunsetTime.textContent = dateSplit(sunset) + "pm";
+          sunriseTime.textContent = dateSplit(sunrise);
+          let am = document.createElement("span");
+          am.classList.add("am-pm");
+          am.textContent = "am"
+          sunriseTime.appendChild(am);
+          sunsetTime.textContent = dateSplit(sunset);
+          let pm = document.createElement("span");
+          pm.classList.add("am-pm");
+          pm.textContent = "pm"
+          sunsetTime.appendChild(pm);
           visibilityDigit.textContent = vis;
           cloudsDigit.textContent = clouds;
-
-          const sunriseAnimation = lottie.loadAnimation({
-            container: document.querySelector(".sunrise-animation"),
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            path: "./assets/sunrise.json"
-          });
-          const sunsetAnimation = lottie.loadAnimation({
-            container: document.querySelector(".sunset-animation"),
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            path: "./assets/sunrise.json"
-          });
-          sunriseAnimation.setSpeed(0.2);
-          sunsetAnimation.setSpeed(-0.2);
 
           checkHumidity(rh);
           windDirection(wind_cdir);
@@ -730,7 +721,7 @@ function dateSplit(timeToSplit) {
   let splitted = timeToSplit.split(":");
   let apiHour = parseInt(splitted[0]);
   let apiMinute = parseInt(splitted[1]);
-  let testZone = (-2).toString()
+  let testZone = currentTimeZone.toString();
   let splittedTimeZone = null;
   if (testZone.includes(".")) {
     splittedTimeZone = testZone.split(".");
@@ -738,21 +729,19 @@ function dateSplit(timeToSplit) {
   else {
     splittedTimeZone = (testZone + ".0").split(".");
   }
-  console.log(splittedTimeZone)
   let hour = parseInt(splittedTimeZone[0]);
   let min = parseInt(splittedTimeZone[1]);
-  min = (min * 10) * 60 / 100
+  min = (min * 10) * 60 / 100;
   if (testZone[0] === "-") {
     min = -min;
   }
-  console.log(apiHour)
   apiHour = apiHour + hour;
   apiMinute = apiMinute + min;
-  console.log(apiHour, apiMinute)
   if (apiMinute >= 60) {
     apiHour++;
     apiMinute = apiMinute - 60;
   }
+  
   if (apiMinute < 0) {
     apiHour--;
     apiMinute = 60 - apiMinute;
@@ -764,8 +753,9 @@ function dateSplit(timeToSplit) {
   if (apiHour > 12) {
     apiHour = apiHour - 12;
   }
+  console.log(apiHour)
   if (apiHour < 0) {
-    return apiHour * (-1) + ":" + apiMinute;
+    return (apiHour + 12)+ ":" + apiMinute;
   }
   else {
     return apiHour + ":" + apiMinute;
@@ -823,12 +813,3 @@ const makeSnow = function () {
     parentDiv.appendChild(snowDiv);
   }
 }
-
-// const responsive = function () {
-//   if (document.body.scrollWidth < 1000) {
-//     document.body.style.gridTemplateColumns = "repeat(4, 1fr)"
-//   }
-//   console.log(document.body.scrollWidth);
-// }
-
-// responsive();
