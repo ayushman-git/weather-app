@@ -1,38 +1,48 @@
-document.onreadystatechange = function () {
-  if (apiLoaded === false) {
-    document.querySelector("body").style.visibility = "hidden";
-  }
-};
-
+let amPm;
 let currentMeasurement = "celcius";
 let celcius = null;
 let fahrenheit = null;
 let temperatureDegree = document.querySelector(".temperature-degree");
 let degreeName = document.querySelector(".degree-name");
 let uvIndex = document.querySelector(".uv-index-text");
-let apiLoaded = false;
 let dateObj = new Date();
-let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-let currentDay = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
+let months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+let currentDay =
+  dateObj.getDate() + " " + months[dateObj.getMonth().toString()];
 dateObj.setDate(dateObj.getDate() + 1);
-let dayOne = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
+let dayOne = dateObj.getDate() + " " + months[dateObj.getMonth().toString()];
 dateObj.setDate(dateObj.getDate() + 1);
-let dayTwo = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
+let dayTwo = dateObj.getDate() + " " + months[dateObj.getMonth().toString()];
 dateObj.setDate(dateObj.getDate() + 1);
-let dayThree = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
+let dayThree = dateObj.getDate() + " " + months[dateObj.getMonth().toString()];
 dateObj.setDate(dateObj.getDate() + 1);
-let dayFour = dateObj.getDate() + ' ' + months[dateObj.getMonth().toString()];
+let dayFour = dateObj.getDate() + " " + months[dateObj.getMonth().toString()];
 let currentTimeZone = (dateObj.getTimezoneOffset() / 60) * -1;
 
 window.addEventListener("load", () => {
   let long, lat;
   let locationTimezone = document.querySelector(".location-timezone");
   let windSpeedText = document.querySelector(".wind-speed-text");
-  let temperatureDescription = document.querySelector(".temperature-description");
+  let temperatureDescription = document.querySelector(
+    ".temperature-description"
+  );
   let aqiLevel = document.querySelector(".aqi-level-text");
   let locationState = document.querySelector(".location-state");
   let dailyOneHigh = document.querySelector(".daily-one-high");
-  let dailyOneLow = document.querySelector(".daily-one-low")
+  let dailyOneLow = document.querySelector(".daily-one-low");
   let dailyTwoHigh = document.querySelector(".daily-two-high");
   let dailyTwoLow = document.querySelector(".daily-two-low");
   let dailyThreeHigh = document.querySelector(".daily-three-high");
@@ -59,25 +69,41 @@ window.addEventListener("load", () => {
   let sunsetTime = document.querySelector(".sunset-time");
   let visibilityDigit = document.querySelector(".visibility-digit");
   let cloudsDigit = document.querySelector(".clouds-digit");
-
+  let lastObTime = document.querySelector(".last_ob_time");
 
   // let locationIcon = document.querySelector(".location-icon");
   // let bodyBackground = document.getElementsByTagName("body");
 
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
+    navigator.geolocation.getCurrentPosition((position) => {
       long = position.coords.longitude;
       lat = position.coords.latitude;
 
-      const api = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${long}&key=ae3720f4b81244fd99737ca75bb804ea`;
+      const api = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${long}&key=8bcaecd44bce4b77a97c32b263480c06`;
 
       fetch(api)
-        .then(response => {
+        .then((response) => {
           return response.json();
         })
-        .then(weatherData => {
+        .then((weatherData) => {
           console.log(weatherData);
-          const { city_name, clouds, temp, ob_time, uv, weather, pod, wind_spd, wind_cdir, aqi, rh, sunrise, sunset, vis, country_code } = weatherData.data[0];
+          const {
+            city_name,
+            clouds,
+            ob_time,
+            temp,
+            uv,
+            weather,
+            pod,
+            wind_spd,
+            wind_cdir,
+            aqi,
+            rh,
+            sunrise,
+            sunset,
+            vis,
+            country_code,
+          } = weatherData.data[0];
 
           locationTimezone.textContent = city_name;
           temperatureDegree.innerHTML = temp + "&#176;";
@@ -88,15 +114,24 @@ window.addEventListener("load", () => {
           sunriseTime.textContent = dateSplit(sunrise);
           let am = document.createElement("span");
           am.classList.add("am-pm");
-          am.textContent = "am"
+          am.textContent = "am";
           sunriseTime.appendChild(am);
           sunsetTime.textContent = dateSplit(sunset);
           let pm = document.createElement("span");
           pm.classList.add("am-pm");
-          pm.textContent = "pm"
+          pm.textContent = "pm";
           sunsetTime.appendChild(pm);
           visibilityDigit.textContent = vis;
           cloudsDigit.textContent = clouds;
+          console.log(
+            dateObj.setFullYear(
+              dateSplit(ob_time.substring(ob_time.length - 5))
+            )
+          );
+          lastObTime.textContent = dateSplit(
+            ob_time.substring(ob_time.length - 5)
+          );
+          document.querySelector(".amPm").textContent = amPm;
 
           checkHumidity(rh);
           windDirection(wind_cdir);
@@ -105,13 +140,14 @@ window.addEventListener("load", () => {
           celcius = temp;
           setIcons(weather, pod);
 
-          return fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&key=ae3720f4b81244fd99737ca75bb804ea`)
-            .then(response => {
+          return fetch(
+            `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&key=8bcaecd44bce4b77a97c32b263480c06`
+          )
+            .then((response) => {
               return response.json();
             })
-            .then(historicalData => {
-              apiLoaded = true;
-              console.log(historicalData)
+            .then((historicalData) => {
+              console.log(historicalData);
               document.querySelector("body").style.visibility = "visible";
 
               const dayOneMax = historicalData.data[0].max_temp;
@@ -138,7 +174,12 @@ window.addEventListener("load", () => {
               const dayFourDes = historicalData.data[3].weather.description;
               const dayFourR = historicalData.data[3].pop;
 
-              const weatherArray = [dayOneWeather, dayTwoWeather, dayThreeWeather, dayFourWeather];
+              const weatherArray = [
+                dayOneWeather,
+                dayTwoWeather,
+                dayThreeWeather,
+                dayFourWeather,
+              ];
 
               umbrellaIcon(dayOneR, dayTwoR, dayThreeR, dayFourR);
 
@@ -172,12 +213,12 @@ window.addEventListener("load", () => {
               for (let iteration = 0; iteration <= 3; iteration++) {
                 setDailyIcons(weatherArray[iteration], iteration);
               }
-            })
-        })
-    })
-  }
-  else {
-    document.getElementById("location-timezone").innerText = "Allow geolocation access."
+            });
+        });
+    });
+  } else {
+    document.getElementById("location-timezone").innerText =
+      "Allow geolocation access.";
   }
 
   function setDailyIcons(weatherArray, iteration) {
@@ -186,228 +227,232 @@ window.addEventListener("load", () => {
       if (iteration === 0) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-one"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/sun-weather.json"
+          path: "./assets/weather/sun-weather.json",
         });
-      }
-      else if (iteration === 1) {
+      } else if (iteration === 1) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-two"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/sun-weather.json"
+          path: "./assets/weather/sun-weather.json",
         });
-      }
-      else if (iteration === 2) {
+      } else if (iteration === 2) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-three"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/sun-weather.json"
+          path: "./assets/weather/sun-weather.json",
         });
-      }
-      else if (iteration === 3) {
+      } else if (iteration === 3) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-four"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/sun-weather.json"
+          path: "./assets/weather/sun-weather.json",
         });
       }
-    }
-
-    else if (currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804) {
+    } else if (
+      currentIconId === 801 ||
+      currentIconId === 802 ||
+      currentIconId === 803 ||
+      currentIconId === 804
+    ) {
       if (iteration === 0) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-one"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/cloudy-weather.json"
+          path: "./assets/weather/cloudy-weather.json",
         });
-      }
-      else if (iteration === 1) {
+      } else if (iteration === 1) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-two"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/cloudy-weather.json"
+          path: "./assets/weather/cloudy-weather.json",
         });
-      }
-      else if (iteration === 2) {
+      } else if (iteration === 2) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-three"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/cloudy-weather.json"
+          path: "./assets/weather/cloudy-weather.json",
         });
-      }
-      else if (iteration === 3) {
+      } else if (iteration === 3) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-four"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/cloudy-weather.json"
+          path: "./assets/weather/cloudy-weather.json",
         });
       }
-    }
-    else if (currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
+    } else if (
+      currentIconId === 500 ||
+      currentIconId === 501 ||
+      currentIconId === 511 ||
+      currentIconId === 520 ||
+      currentIconId === 521 ||
+      currentIconId === 300 ||
+      currentIconId === 301 ||
+      currentIconId === 302
+    ) {
       if (iteration === 0) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-one"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/rainy-weather.json"
+          path: "./assets/weather/rainy-weather.json",
         });
-      }
-      else if (iteration === 1) {
+      } else if (iteration === 1) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-two"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/rainy-weather.json"
+          path: "./assets/weather/rainy-weather.json",
         });
-      }
-      else if (iteration === 2) {
+      } else if (iteration === 2) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-three"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/rainy-weather.json"
+          path: "./assets/weather/rainy-weather.json",
         });
-      }
-      else if (iteration === 3) {
+      } else if (iteration === 3) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-four"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/rainy-weather.json"
+          path: "./assets/weather/rainy-weather.json",
         });
       }
-    }
-    else if (currentIconId === 200 || currentIconId === 201 || currentIconId === 202 || currentIconId === 230 || currentIconId === 231 || currentIconId === 232 || currentIconId === 233) {
+    } else if (
+      currentIconId === 200 ||
+      currentIconId === 201 ||
+      currentIconId === 202 ||
+      currentIconId === 230 ||
+      currentIconId === 231 ||
+      currentIconId === 232 ||
+      currentIconId === 233
+    ) {
       if (iteration === 0) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-one"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/stormy-weather.json"
+          path: "./assets/weather/stormy-weather.json",
         });
-      }
-      else if (iteration === 1) {
+      } else if (iteration === 1) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-two"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/stormy-weather.json"
+          path: "./assets/weather/stormy-weather.json",
         });
-      }
-      else if (iteration === 2) {
+      } else if (iteration === 2) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-three"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/stormy-weather.json"
+          path: "./assets/weather/stormy-weather.json",
         });
-      }
-      else if (iteration === 3) {
+      } else if (iteration === 3) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-four"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/stormy-weather.json"
+          path: "./assets/weather/stormy-weather.json",
         });
       }
-    }
-    else if (currentIconId === 502 || currentIconId === 522) {
+    } else if (currentIconId === 502 || currentIconId === 522) {
       if (iteration === 0) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-one"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/torrential-rain-weather.json"
+          path: "./assets/weather/torrential-rain-weather.json",
         });
-      }
-      else if (iteration === 1) {
+      } else if (iteration === 1) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-two"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/torrential-rain-weather.json"
+          path: "./assets/weather/torrential-rain-weather.json",
         });
-      }
-      else if (iteration === 2) {
+      } else if (iteration === 2) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-three"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/torrential-rain-weather.json"
+          path: "./assets/weather/torrential-rain-weather.json",
         });
-      }
-      else if (iteration === 3) {
+      } else if (iteration === 3) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-four"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/torrential-rain-weather.json"
+          path: "./assets/weather/torrential-rain-weather.json",
         });
       }
-    }
-    else if (currentIconId === 600 || currentIconId === 601 || currentIconId === 610 || currentIconId === 611 || currentIconId === 621) {
+    } else if (
+      currentIconId === 600 ||
+      currentIconId === 601 ||
+      currentIconId === 610 ||
+      currentIconId === 611 ||
+      currentIconId === 621
+    ) {
       if (iteration === 0) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-one"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/light-snowy-weather.json"
+          path: "./assets/weather/light-snowy-weather.json",
         });
-      }
-      else if (iteration === 1) {
+      } else if (iteration === 1) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-two"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/light-snowy-weather.json"
+          path: "./assets/weather/light-snowy-weather.json",
         });
-      }
-      else if (iteration === 2) {
+      } else if (iteration === 2) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-three"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/light-snowy-weather.json"
+          path: "./assets/weather/light-snowy-weather.json",
         });
-      }
-      else if (iteration === 3) {
+      } else if (iteration === 3) {
         lottie.loadAnimation({
           container: document.querySelector(".daily-icon-four"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/weather/light-snowy-weather.json"
+          path: "./assets/weather/light-snowy-weather.json",
         });
       }
     }
@@ -416,97 +461,132 @@ window.addEventListener("load", () => {
   function setIcons(weather, pod) {
     const currentIconId = parseInt(weather.code);
     const currentPod = pod.toString();
-    if (currentIconId === 800 && currentPod === 'd') {
+    if (currentIconId === 800 && currentPod === "d") {
       lottie.loadAnimation({
-        container: document.getElementById('test'),
-        renderer: 'svg',
+        container: document.getElementById("test"),
+        renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "./assets/weather/sun-weather.json"
+        path: "./assets/weather/sun-weather.json",
       });
-      document.body.style.background = "linear-gradient(135deg, #0575E6, #021B79)";
-    }
-    else if (currentIconId === 800 && currentPod === 'n') {
+      document.body.style.background =
+        "linear-gradient(135deg, #0575E6, #021B79)";
+    } else if (currentIconId === 800 && currentPod === "n") {
       lottie.loadAnimation({
-        container: document.getElementById('test'),
-        renderer: 'svg',
+        container: document.getElementById("test"),
+        renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "./assets/weather/night-weather.json"
+        path: "./assets/weather/night-weather.json",
       });
       makeStars();
-      document.body.style.background = "linear-gradient(135deg, #1b1b1b, #000000)";
-    }
-    else if ((currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804) && currentPod === 'd') {
+      document.body.style.background =
+        "linear-gradient(135deg, #1b1b1b, #000000)";
+    } else if (
+      (currentIconId === 801 ||
+        currentIconId === 802 ||
+        currentIconId === 803 ||
+        currentIconId === 804) &&
+      currentPod === "d"
+    ) {
       lottie.loadAnimation({
-        container: document.getElementById('test'),
-        renderer: 'svg',
+        container: document.getElementById("test"),
+        renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "./assets/weather/cloudy-weather.json"
+        path: "./assets/weather/cloudy-weather.json",
       });
-      document.body.style.background = "linear-gradient(135deg, #0575E6, #021B79)";
+      document.body.style.background =
+        "linear-gradient(135deg, #0575E6, #021B79)";
       document.querySelector(".cloud-images").style.display = "inline-block";
-    }
-    else if ((currentIconId === 801 || currentIconId === 802 || currentIconId === 803 || currentIconId === 804) && currentPod === 'n') {
+    } else if (
+      (currentIconId === 801 ||
+        currentIconId === 802 ||
+        currentIconId === 803 ||
+        currentIconId === 804) &&
+      currentPod === "n"
+    ) {
       lottie.loadAnimation({
-        container: document.getElementById('test'),
-        renderer: 'svg',
+        container: document.getElementById("test"),
+        renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "./assets/weather/night-weather.json"
+        path: "./assets/weather/night-weather.json",
       });
       makeStars();
-      document.body.style.background = "linear-gradient(135deg, #1b1b1b, #000000)";
+      document.body.style.background =
+        "linear-gradient(135deg, #1b1b1b, #000000)";
       document.querySelector(".cloud-images").style.display = "inline-block";
       document.querySelector(".cloud-images").style.opacity = "0.3";
-    }
-    else if (currentIconId === 500 || currentIconId === 501 || currentIconId === 511 || currentIconId === 520 || currentIconId === 521 || currentIconId === 300 || currentIconId === 301 || currentIconId === 302) {
+    } else if (
+      currentIconId === 500 ||
+      currentIconId === 501 ||
+      currentIconId === 511 ||
+      currentIconId === 520 ||
+      currentIconId === 521 ||
+      currentIconId === 300 ||
+      currentIconId === 301 ||
+      currentIconId === 302
+    ) {
       lottie.loadAnimation({
-        container: document.getElementById('test'),
-        renderer: 'svg',
+        container: document.getElementById("test"),
+        renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "./assets/weather/rainy-weather.json"
+        path: "./assets/weather/rainy-weather.json",
       });
-      document.body.style.background = "linear-gradient(135deg, #07519c, #0e1418)";
+      document.body.style.background =
+        "linear-gradient(135deg, #07519c, #0e1418)";
       makeItRain();
-    }
-    else if (currentIconId === 200 || currentIconId === 201 || currentIconId === 202 || currentIconId === 230 || currentIconId === 231 || currentIconId === 232 || currentIconId === 233) {
+    } else if (
+      currentIconId === 200 ||
+      currentIconId === 201 ||
+      currentIconId === 202 ||
+      currentIconId === 230 ||
+      currentIconId === 231 ||
+      currentIconId === 232 ||
+      currentIconId === 233
+    ) {
       lottie.loadAnimation({
-        container: document.getElementById('test'),
-        renderer: 'svg',
+        container: document.getElementById("test"),
+        renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "./assets/weather/stormy-weather.json"
+        path: "./assets/weather/stormy-weather.json",
       });
-      document.body.style.background = "linear-gradient(135deg, #0d4680, #06080a)";
+      document.body.style.background =
+        "linear-gradient(135deg, #0d4680, #06080a)";
       makeItRain();
-    }
-    else if (currentIconId === 502 || currentIconId === 522) {
+    } else if (currentIconId === 502 || currentIconId === 522) {
       lottie.loadAnimation({
-        container: document.getElementById('test'),
-        renderer: 'svg',
+        container: document.getElementById("test"),
+        renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "./assets/weather/torrential-rain-weather.json"
+        path: "./assets/weather/torrential-rain-weather.json",
       });
-      document.body.style.background = "linear-gradient(135deg, #0d4680, #06080a)";
+      document.body.style.background =
+        "linear-gradient(135deg, #0d4680, #06080a)";
       makeItRain();
-    }
-    else if (currentIconId === 600 || currentIconId === 601 || currentIconId === 610 || currentIconId === 611 || currentIconId === 621) {
+    } else if (
+      currentIconId === 600 ||
+      currentIconId === 601 ||
+      currentIconId === 610 ||
+      currentIconId === 611 ||
+      currentIconId === 621
+    ) {
       lottie.loadAnimation({
-        container: document.getElementById('test'),
-        renderer: 'svg',
+        container: document.getElementById("test"),
+        renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "./assets/weather/light-snowy-weather.json"
+        path: "./assets/weather/light-snowy-weather.json",
       });
-      document.body.style.background = "linear-gradient(135deg, #e4e5e6, #00416a)";
+      document.body.style.background =
+        "linear-gradient(135deg, #e4e5e6, #00416a)";
       makeSnow();
-    }
-    else {
-      console.log(currentIconId, currentPod)
+    } else {
+      console.log(currentIconId, currentPod);
     }
   }
 
@@ -515,28 +595,23 @@ window.addEventListener("load", () => {
       aqiLevelDigit.textContent = aqi;
       // aqiLevelDigit.style.color = "#83FE84"
       aqiLevel.textContent = `Good`;
-    }
-    else if (aqi <= 100) {
+    } else if (aqi <= 100) {
       aqiLevelDigit.textContent = aqi;
       // aqiLevelDigit.style.color = "#83FE84"
       aqiLevel.textContent = `Satisfactory`;
-    }
-    else if (aqi <= 200) {
+    } else if (aqi <= 200) {
       aqiLevelDigit.textContent = aqi;
       // aqiLevelDigit.style.color = "#FFFA5D"
       aqiLevel.textContent = `Moderate`;
-    }
-    else if (aqi <= 300) {
+    } else if (aqi <= 300) {
       aqiLevelDigit.textContent = aqi;
       // aqiLevelDigit.style.color = "#FFB870"
       aqiLevel.textContent = `Poor`;
-    }
-    else if (aqi <= 400) {
+    } else if (aqi <= 400) {
       aqiLevelDigit.textContent = aqi;
       // aqiLevelDigit.style.color = "#FFB870"
       aqiLevel.textContent = `Bad`;
-    }
-    else if (aqi <= 500) {
+    } else if (aqi <= 500) {
       aqiLevel.textContent = `Severe (${aqi})`;
     }
   }
@@ -547,42 +622,40 @@ window.addEventListener("load", () => {
       if (uv <= 2) {
         uvIndex.textContent = `Low`;
         uvIndexDigit.textContent = uv;
-      }
-      else if (uv <= 5) {
+      } else if (uv <= 5) {
         uvIndex.textContent = `Moderate`;
         uvIndexDigit.textContent = uv;
-      }
-      else if (uv <= 7) {
+      } else if (uv <= 7) {
         uvIndex.textContent = `High`;
         uvIndexDigit.textContent = uv;
-      }
-      else if (uv <= 10) {
+      } else if (uv <= 10) {
         uvIndex.textContent = `Inflated`;
         uvIndexDigit.textContent = uv;
-      }
-
-      else if (uv === 11) {
+      } else if (uv === 11) {
         uvIndex.textContent = `Extreme`;
         uvIndexDigit.textContent = uv;
       }
-    }
-    else {
+    } else {
       uvIndex.textContent = `Night`;
-      uvIndexDigit.textContent = '-';
+      uvIndexDigit.textContent = "-";
     }
   }
 
   function umbrellaIcon(dayOneR, dayTwoR, dayThreeR, dayFourR) {
-    if (dayOneR >= 50) document.querySelector(".rain-one-icon").style.visibility = "visible";
+    if (dayOneR >= 50)
+      document.querySelector(".rain-one-icon").style.visibility = "visible";
     else document.querySelector(".rain-one-icon").style.visibility = "hidden";
 
-    if (dayTwoR >= 50) document.querySelector(".rain-two-icon").style.visibility = "visible";
+    if (dayTwoR >= 50)
+      document.querySelector(".rain-two-icon").style.visibility = "visible";
     else document.querySelector(".rain-two-icon").style.visibility = "hidden";
 
-    if (dayThreeR >= 50) document.querySelector(".rain-three-icon").style.visibility = "visible";
+    if (dayThreeR >= 50)
+      document.querySelector(".rain-three-icon").style.visibility = "visible";
     else document.querySelector(".rain-three-icon").style.visibility = "hidden";
 
-    if (dayFourR >= 50) document.querySelector(".rain-four-icon").style.visibility = "visible";
+    if (dayFourR >= 50)
+      document.querySelector(".rain-four-icon").style.visibility = "visible";
     else document.querySelector(".rain-four-icon").style.visibility = "hidden";
   }
 
@@ -591,93 +664,108 @@ window.addEventListener("load", () => {
       if (wind_cdir === "E") {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/wind.json"
+          path: "./assets/wind.json",
         });
-      }
-      else if (wind_cdir === "S") {
+      } else if (wind_cdir === "S") {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/wind.json"
+          path: "./assets/wind.json",
         });
-        document.querySelector(".wind-speed-animation").style.transform = "rotate(90deg)"
-      }
-      else if (wind_cdir === "W") {
+        document.querySelector(".wind-speed-animation").style.transform =
+          "rotate(90deg)";
+      } else if (wind_cdir === "W") {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/wind.json"
+          path: "./assets/wind.json",
         });
-        document.querySelector(".wind-speed-animation").style.transform = "rotate(180deg)"
-      }
-      else if (wind_cdir === "N") {
+        document.querySelector(".wind-speed-animation").style.transform =
+          "rotate(180deg)";
+      } else if (wind_cdir === "N") {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/wind.json"
+          path: "./assets/wind.json",
         });
-        document.querySelector(".wind-speed-animation").style.transform = "rotate(-90deg)"
-      }
-      else if (wind_cdir === "S") {
+        document.querySelector(".wind-speed-animation").style.transform =
+          "rotate(-90deg)";
+      } else if (wind_cdir === "S") {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/wind.json"
+          path: "./assets/wind.json",
         });
-        document.querySelector(".wind-speed-animation").style.transform = "rotate(90deg)"
-      }
-      else if (wind_cdir === "ESE" || wind_cdir === "SE" || wind_cdir === "SSE") {
+        document.querySelector(".wind-speed-animation").style.transform =
+          "rotate(90deg)";
+      } else if (
+        wind_cdir === "ESE" ||
+        wind_cdir === "SE" ||
+        wind_cdir === "SSE"
+      ) {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/wind.json"
+          path: "./assets/wind.json",
         });
-        document.querySelector(".wind-speed-animation").style.transform = "rotate(45deg)"
-      }
-      else if (wind_cdir === "NW" || wind_cdir === "WNW" || wind_cdir === "NNW") {
+        document.querySelector(".wind-speed-animation").style.transform =
+          "rotate(45deg)";
+      } else if (
+        wind_cdir === "NW" ||
+        wind_cdir === "WNW" ||
+        wind_cdir === "NNW"
+      ) {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/wind.json"
+          path: "./assets/wind.json",
         });
-        document.querySelector(".wind-speed-animation").style.transform = "rotate(225deg)"
-      }
-      else if (wind_cdir === "ENE" || wind_cdir === "NE" || wind_cdir === "NNE") {
+        document.querySelector(".wind-speed-animation").style.transform =
+          "rotate(225deg)";
+      } else if (
+        wind_cdir === "ENE" ||
+        wind_cdir === "NE" ||
+        wind_cdir === "NNE"
+      ) {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/wind.json"
+          path: "./assets/wind.json",
         });
-        document.querySelector(".wind-speed-animation").style.transform = "rotate(-45deg)"
-      }
-      else if (wind_cdir === "WSW" || wind_cdir === "SW" || wind_cdir === "SSW") {
+        document.querySelector(".wind-speed-animation").style.transform =
+          "rotate(-45deg)";
+      } else if (
+        wind_cdir === "WSW" ||
+        wind_cdir === "SW" ||
+        wind_cdir === "SSW"
+      ) {
         lottie.loadAnimation({
           container: document.querySelector(".wind-speed-animation"),
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
-          path: "./assets/wind.json"
+          path: "./assets/wind.json",
         });
-        document.querySelector(".wind-speed-animation").style.transform = "rotate(135deg)"
-      }
-      else {
+        document.querySelector(".wind-speed-animation").style.transform =
+          "rotate(135deg)";
+      } else {
         console.log("Wrong direction");
       }
     }
@@ -686,17 +774,13 @@ window.addEventListener("load", () => {
   function checkHumidity(rh) {
     if (rh <= 15) {
       humidityText.textContent = "Shrivel";
-    }
-    else if (rh <= 30) {
+    } else if (rh <= 30) {
       humidityText.textContent = "Dry";
-    }
-    else if (rh <= 50) {
+    } else if (rh <= 50) {
       humidityText.textContent = "Comfortable";
-    }
-    else if (rh <= 80) {
+    } else if (rh <= 80) {
       humidityText.textContent = "Humid";
-    }
-    else if (rh <= 100) {
+    } else if (rh <= 100) {
       humidityText.textContent = "Muggy";
     }
   }
@@ -704,20 +788,19 @@ window.addEventListener("load", () => {
 
 function changeMeasurement() {
   if (currentMeasurement === "celcius") {
-    fahrenheit = celcius * 9 / 5 + 32;
+    fahrenheit = (celcius * 9) / 5 + 32;
     temperatureDegree.innerHTML = Math.round(fahrenheit).toFixed(1) + "&#176;";
-    degreeName.textContent = "F"
-    currentMeasurement = "fahrenheit"
-  }
-
-  else if (currentMeasurement === "fahrenheit") {
+    degreeName.textContent = "F";
+    currentMeasurement = "fahrenheit";
+  } else if (currentMeasurement === "fahrenheit") {
     temperatureDegree.innerHTML = celcius + "&#176;";
-    degreeName.textContent = "C"
-    currentMeasurement = "celcius"
+    degreeName.textContent = "C";
+    currentMeasurement = "celcius";
   }
 }
 
 function dateSplit(timeToSplit) {
+  amPm = "am";
   let splitted = timeToSplit.split(":");
   let apiHour = parseInt(splitted[0]);
   let apiMinute = parseInt(splitted[1]);
@@ -725,13 +808,12 @@ function dateSplit(timeToSplit) {
   let splittedTimeZone = null;
   if (testZone.includes(".")) {
     splittedTimeZone = testZone.split(".");
-  }
-  else {
+  } else {
     splittedTimeZone = (testZone + ".0").split(".");
   }
   let hour = parseInt(splittedTimeZone[0]);
   let min = parseInt(splittedTimeZone[1]);
-  min = (min * 10) * 60 / 100;
+  min = (min * 10 * 60) / 100;
   if (testZone[0] === "-") {
     min = -min;
   }
@@ -741,7 +823,7 @@ function dateSplit(timeToSplit) {
     apiHour++;
     apiMinute = apiMinute - 60;
   }
-  
+
   if (apiMinute < 0) {
     apiHour--;
     apiMinute = 60 - apiMinute;
@@ -751,50 +833,83 @@ function dateSplit(timeToSplit) {
   }
 
   if (apiHour > 12) {
+    amPm = "pm";
     apiHour = apiHour - 12;
   }
-  console.log(apiHour)
+  console.log(apiHour);
   if (apiHour < 0) {
-    return (apiHour + 12)+ ":" + apiMinute;
-  }
-  else {
+    return apiHour + 12 + ":" + apiMinute;
+  } else {
     return apiHour + ":" + apiMinute;
   }
 }
 
-
-var makeItRain = function () {
+const makeItRain = function () {
   //clear out everything
-  $('.rain').empty();
+  $(".rain").empty();
 
-  var increment = 0;
-  var drops = "";
-  var backDrops = "";
+  let increment = 0;
+  let drops = "";
+  let backDrops = "";
 
   while (increment < 100) {
     //couple random numbers to use for various randomizations
     //random number between 98 and 1
-    var randoHundo = (Math.floor(Math.random() * (98 - 1 + 1) + 1));
+    let randoHundo = Math.floor(Math.random() * (98 - 1 + 1) + 1);
     //random number between 5 and 2
-    var randoFiver = (Math.floor(Math.random() * (5 - 2 + 1) + 2));
+    let randoFiver = Math.floor(Math.random() * (5 - 2 + 1) + 2);
     //increment
     increment += randoFiver;
     //add in a new raindrop with various randomizations to certain CSS properties
-    drops += '<div class="drop" style="left: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
-    backDrops += '<div class="drop" style="right: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
+    drops +=
+      '<div class="drop" style="left: ' +
+      increment +
+      "%; bottom: " +
+      (randoFiver + randoFiver - 1 + 100) +
+      "%; animation-delay: 0." +
+      randoHundo +
+      "s; animation-duration: 0.5" +
+      randoHundo +
+      's;"><div class="stem" style="animation-delay: 0.' +
+      randoHundo +
+      "s; animation-duration: 0.5" +
+      randoHundo +
+      's;"></div><div class="splat" style="animation-delay: 0.' +
+      randoHundo +
+      "s; animation-duration: 0.5" +
+      randoHundo +
+      's;"></div></div>';
+    backDrops +=
+      '<div class="drop" style="right: ' +
+      increment +
+      "%; bottom: " +
+      (randoFiver + randoFiver - 1 + 100) +
+      "%; animation-delay: 0." +
+      randoHundo +
+      "s; animation-duration: 0.5" +
+      randoHundo +
+      's;"><div class="stem" style="animation-delay: 0.' +
+      randoHundo +
+      "s; animation-duration: 0.5" +
+      randoHundo +
+      's;"></div><div class="splat" style="animation-delay: 0.' +
+      randoHundo +
+      "s; animation-duration: 0.5" +
+      randoHundo +
+      's;"></div></div>';
   }
 
-  $('.rain.front-row').append(drops);
-  $('.rain.back-row').append(backDrops);
-}
+  $(".rain.front-row").append(drops);
+  $(".rain.back-row").append(backDrops);
+};
 
 const makeStars = function () {
   let parentDiv = document.querySelector(".night-sky");
-  let starsDiv = []
+  let starsDiv = [];
   for (let i = 0; i <= 200; i++) {
     let randomSize = Math.floor(Math.random() * 2) + 1;
     starsDiv[i] = document.createElement("div");
-    parentDiv.appendChild(starsDiv[i])
+    parentDiv.appendChild(starsDiv[i]);
     starsDiv[i].id = "star-" + i;
     starsDiv[i].classList.add("stars");
     starsDiv[i].style.top = Math.floor(Math.random() * screen.height) + "px";
@@ -802,8 +917,8 @@ const makeStars = function () {
     starsDiv[i].style.height = randomSize + "px";
     starsDiv[i].style.width = randomSize + "px";
   }
-  console.log(starsDiv)
-}
+  console.log(starsDiv);
+};
 
 const makeSnow = function () {
   let parentDiv = document.querySelector(".snow-background");
@@ -812,4 +927,18 @@ const makeSnow = function () {
     snowDiv.classList.add("snow");
     parentDiv.appendChild(snowDiv);
   }
-}
+};
+
+(lazyLoadImages = () => {
+  let allImages = document.querySelector(".cloud-images").children;
+  setTimeout(()=> {
+    for (let image in allImages) {
+      console.log(image)
+      allImages[image].src = allImages[image].dataset.src;
+      console.log(allImages[image].dataset.src);
+      if (image == 9) {
+        return;
+      }
+    }
+  }, 1000)
+})();

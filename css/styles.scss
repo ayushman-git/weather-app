@@ -62,7 +62,7 @@ body {
 }
 
 .degree h2 {
-  font-size: 6vw;
+  font-size: 5vw;
   display: inline-block;
 }
 .location-icon {
@@ -308,6 +308,20 @@ body {
   display: flex;
   align-items: center;
   font-size: 0.8em;
+}
+
+.amPm{
+  align-self: center;
+  font-size: 0.8em;
+}
+
+.last_ob_time_div {
+  display: flex;
+  font-size: 0.8em;
+}
+
+.last_ob_time_div > * {
+  padding-right: 3px;
 }
 
 .sunrise-animation,
