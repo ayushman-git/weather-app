@@ -1,4 +1,5 @@
 let amPm;
+let newLong, newLat;
 let currentMeasurement = "celcius";
 let celcius = null;
 let fahrenheit = null;
@@ -33,6 +34,12 @@ let dayFour = dateObj.getDate() + " " + months[dateObj.getMonth().toString()];
 let currentTimeZone = (dateObj.getTimezoneOffset() / 60) * -1;
 
 window.addEventListener("load", () => {
+  // const newLoc = async() => {
+  //   let response = await fetch('http://ip-api.com/json');
+  //   let loc = await response.json();
+  //   newLat = loc.lat;
+  //   newLong = loc.lon;
+  // }
   let long, lat;
   let locationTimezone = document.querySelector(".location-timezone");
   let windSpeedText = document.querySelector(".wind-speed-text");
@@ -74,7 +81,6 @@ window.addEventListener("load", () => {
   // let locationIcon = document.querySelector(".location-icon");
   // let bodyBackground = document.getElementsByTagName("body");
 
-  if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       long = position.coords.longitude;
       lat = position.coords.latitude;
@@ -216,10 +222,6 @@ window.addEventListener("load", () => {
             });
         });
     });
-  } else {
-    document.getElementById("location-timezone").innerText =
-      "Allow geolocation access.";
-  }
 
   function setDailyIcons(weatherArray, iteration) {
     const currentIconId = weatherArray;
@@ -933,9 +935,7 @@ const makeSnow = function () {
   let allImages = document.querySelector(".cloud-images").children;
   setTimeout(()=> {
     for (let image in allImages) {
-      console.log(image)
       allImages[image].src = allImages[image].dataset.src;
-      console.log(allImages[image].dataset.src);
       if (image == 9) {
         return;
       }
