@@ -1,5 +1,5 @@
 let amPm;
-let newLong, newLat;
+let dataAcq = false;
 let currentMeasurement = "celcius";
 let celcius = null;
 let fahrenheit = null;
@@ -34,12 +34,6 @@ let dayFour = dateObj.getDate() + " " + months[dateObj.getMonth().toString()];
 let currentTimeZone = (dateObj.getTimezoneOffset() / 60) * -1;
 
 window.addEventListener("load", () => {
-  // const newLoc = async() => {
-  //   let response = await fetch('http://ip-api.com/json');
-  //   let loc = await response.json();
-  //   newLat = loc.lat;
-  //   newLong = loc.lon;
-  // }
   let long, lat;
   let locationTimezone = document.querySelector(".location-timezone");
   let windSpeedText = document.querySelector(".wind-speed-text");
@@ -77,151 +71,149 @@ window.addEventListener("load", () => {
   let visibilityDigit = document.querySelector(".visibility-digit");
   let cloudsDigit = document.querySelector(".clouds-digit");
   let lastObTime = document.querySelector(".last_ob_time");
+  let errorMsg = document.querySelector(".error-msg");
 
-  // let locationIcon = document.querySelector(".location-icon");
-  // let bodyBackground = document.getElementsByTagName("body");
+  navigator.geolocation.getCurrentPosition((position) => {
+    console.log(position)
+    long = position.coords.longitude;
+    lat = position.coords.latitude;
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      long = position.coords.longitude;
-      lat = position.coords.latitude;
+    const api = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${long}&key=8bcaecd44bce4b77a97c32b263480c06`;
 
-      const api = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${long}&key=8bcaecd44bce4b77a97c32b263480c06`;
+    fetch(api)
+      .then((response) => {
+        return response.json();
+      })
+      .then((weatherData) => {
+        console.log(weatherData);
+        const {
+          city_name,
+          clouds,
+          ob_time,
+          temp,
+          uv,
+          weather,
+          pod,
+          wind_spd,
+          wind_cdir,
+          aqi,
+          rh,
+          sunrise,
+          sunset,
+          vis,
+          country_code,
+        } = weatherData.data[0];
 
-      fetch(api)
-        .then((response) => {
-          return response.json();
-        })
-        .then((weatherData) => {
-          console.log(weatherData);
-          const {
-            city_name,
-            clouds,
-            ob_time,
-            temp,
-            uv,
-            weather,
-            pod,
-            wind_spd,
-            wind_cdir,
-            aqi,
-            rh,
-            sunrise,
-            sunset,
-            vis,
-            country_code,
-          } = weatherData.data[0];
+        locationTimezone.textContent = city_name;
+        temperatureDegree.innerHTML = temp + "&#176;";
+        temperatureDescription.textContent = weather.description;
+        locationState.textContent = "/" + country_code;
+        windSpeedText.textContent = Math.round(wind_spd);
+        humidityDigit.textContent = Math.round(rh);
+        sunriseTime.textContent = dateSplit(sunrise);
+        let am = document.createElement("span");
+        am.classList.add("am-pm");
+        am.textContent = "am";
+        sunriseTime.appendChild(am);
+        sunsetTime.textContent = dateSplit(sunset);
+        let pm = document.createElement("span");
+        pm.classList.add("am-pm");
+        pm.textContent = "pm";
+        sunsetTime.appendChild(pm);
+        visibilityDigit.textContent = vis;
+        cloudsDigit.textContent = clouds;
+        console.log(
+          dateObj.setFullYear(dateSplit(ob_time.substring(ob_time.length - 5)))
+        );
+        lastObTime.textContent = dateSplit(
+          ob_time.substring(ob_time.length - 5)
+        );
+        document.querySelector(".amPm").textContent = amPm;
 
-          locationTimezone.textContent = city_name;
-          temperatureDegree.innerHTML = temp + "&#176;";
-          temperatureDescription.textContent = weather.description;
-          locationState.textContent = "/" + country_code;
-          windSpeedText.textContent = Math.round(wind_spd);
-          humidityDigit.textContent = Math.round(rh);
-          sunriseTime.textContent = dateSplit(sunrise);
-          let am = document.createElement("span");
-          am.classList.add("am-pm");
-          am.textContent = "am";
-          sunriseTime.appendChild(am);
-          sunsetTime.textContent = dateSplit(sunset);
-          let pm = document.createElement("span");
-          pm.classList.add("am-pm");
-          pm.textContent = "pm";
-          sunsetTime.appendChild(pm);
-          visibilityDigit.textContent = vis;
-          cloudsDigit.textContent = clouds;
-          console.log(
-            dateObj.setFullYear(
-              dateSplit(ob_time.substring(ob_time.length - 5))
-            )
-          );
-          lastObTime.textContent = dateSplit(
-            ob_time.substring(ob_time.length - 5)
-          );
-          document.querySelector(".amPm").textContent = amPm;
+        checkHumidity(rh);
+        windDirection(wind_cdir);
+        aqiCheck(aqi);
+        uvCheck(uv, pod);
+        celcius = temp;
+        setIcons(weather, pod);
 
-          checkHumidity(rh);
-          windDirection(wind_cdir);
-          aqiCheck(aqi);
-          uvCheck(uv, pod);
-          celcius = temp;
-          setIcons(weather, pod);
+        return fetch(
+          `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&key=8bcaecd44bce4b77a97c32b263480c06`
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((historicalData) => {
+            console.log(historicalData);
+            document.querySelector("body").style.visibility = "visible";
 
-          return fetch(
-            `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&key=8bcaecd44bce4b77a97c32b263480c06`
-          )
-            .then((response) => {
-              return response.json();
-            })
-            .then((historicalData) => {
-              console.log(historicalData);
-              document.querySelector("body").style.visibility = "visible";
+            const dayOneMax = historicalData.data[0].max_temp;
+            const dayOneMin = historicalData.data[0].min_temp;
+            const dayOneWeather = historicalData.data[0].weather.code;
+            const dayOneDes = historicalData.data[0].weather.description;
+            const dayOneR = historicalData.data[0].pop;
 
-              const dayOneMax = historicalData.data[0].max_temp;
-              const dayOneMin = historicalData.data[0].min_temp;
-              const dayOneWeather = historicalData.data[0].weather.code;
-              const dayOneDes = historicalData.data[0].weather.description;
-              const dayOneR = historicalData.data[0].pop;
+            const dayTwoMax = historicalData.data[1].max_temp;
+            const dayTwoMin = historicalData.data[1].min_temp;
+            const dayTwoWeather = historicalData.data[1].weather.code;
+            const dayTwoDes = historicalData.data[1].weather.description;
+            const dayTwoR = historicalData.data[1].pop;
 
-              const dayTwoMax = historicalData.data[1].max_temp;
-              const dayTwoMin = historicalData.data[1].min_temp;
-              const dayTwoWeather = historicalData.data[1].weather.code;
-              const dayTwoDes = historicalData.data[1].weather.description;
-              const dayTwoR = historicalData.data[1].pop;
+            const dayThreeMax = historicalData.data[2].max_temp;
+            const dayThreeMin = historicalData.data[2].min_temp;
+            const dayThreeWeather = historicalData.data[2].weather.code;
+            const dayThreeDes = historicalData.data[2].weather.description;
+            const dayThreeR = historicalData.data[2].pop;
 
-              const dayThreeMax = historicalData.data[2].max_temp;
-              const dayThreeMin = historicalData.data[2].min_temp;
-              const dayThreeWeather = historicalData.data[2].weather.code;
-              const dayThreeDes = historicalData.data[2].weather.description;
-              const dayThreeR = historicalData.data[2].pop;
+            const dayFourMax = historicalData.data[3].max_temp;
+            const dayFourMin = historicalData.data[3].min_temp;
+            const dayFourWeather = historicalData.data[3].weather.code;
+            const dayFourDes = historicalData.data[3].weather.description;
+            const dayFourR = historicalData.data[3].pop;
 
-              const dayFourMax = historicalData.data[3].max_temp;
-              const dayFourMin = historicalData.data[3].min_temp;
-              const dayFourWeather = historicalData.data[3].weather.code;
-              const dayFourDes = historicalData.data[3].weather.description;
-              const dayFourR = historicalData.data[3].pop;
+            const weatherArray = [
+              dayOneWeather,
+              dayTwoWeather,
+              dayThreeWeather,
+              dayFourWeather,
+            ];
 
-              const weatherArray = [
-                dayOneWeather,
-                dayTwoWeather,
-                dayThreeWeather,
-                dayFourWeather,
-              ];
+            umbrellaIcon(dayOneR, dayTwoR, dayThreeR, dayFourR);
 
-              umbrellaIcon(dayOneR, dayTwoR, dayThreeR, dayFourR);
+            dayOneDate.textContent = dayOne;
+            dayTwoDate.textContent = dayTwo;
+            dayThreeDate.textContent = dayThree;
+            dayFourDate.textContent = dayFour;
 
-              dayOneDate.textContent = dayOne;
-              dayTwoDate.textContent = dayTwo;
-              dayThreeDate.textContent = dayThree;
-              dayFourDate.textContent = dayFour;
+            dayOneDescription.textContent = dayOneDes;
+            dayTwoDescription.textContent = dayTwoDes;
+            dayThreeDescription.textContent = dayThreeDes;
+            dayFourDescription.textContent = dayFourDes;
 
-              dayOneDescription.textContent = dayOneDes;
-              dayTwoDescription.textContent = dayTwoDes;
-              dayThreeDescription.textContent = dayThreeDes;
-              dayFourDescription.textContent = dayFourDes;
+            dailyOneHigh.innerHTML = dayOneMax + "&#176;";
+            dailyOneLow.innerHTML = dayOneMin + "&#176;";
 
-              dailyOneHigh.innerHTML = dayOneMax + "&#176;";
-              dailyOneLow.innerHTML = dayOneMin + "&#176;";
+            dailyTwoHigh.innerHTML = dayTwoMax + "&#176;";
+            dailyTwoLow.innerHTML = dayTwoMin + "&#176;";
 
-              dailyTwoHigh.innerHTML = dayTwoMax + "&#176;";
-              dailyTwoLow.innerHTML = dayTwoMin + "&#176;";
+            dailyThreeHigh.innerHTML = dayThreeMax + "&#176;";
+            dailyThreeLow.innerHTML = dayThreeMin + "&#176;";
 
-              dailyThreeHigh.innerHTML = dayThreeMax + "&#176;";
-              dailyThreeLow.innerHTML = dayThreeMin + "&#176;";
+            dailyFourHigh.innerHTML = dayFourMax + "&#176;";
+            dailyFourLow.innerHTML = dayFourMin + "&#176;";
 
-              dailyFourHigh.innerHTML = dayFourMax + "&#176;";
-              dailyFourLow.innerHTML = dayFourMin + "&#176;";
+            dayOneRain.textContent = dayOneR + "%";
+            dayTwoRain.textContent = dayTwoR + "%";
+            dayThreeRain.textContent = dayThreeR + "%";
+            dayFourRain.textContent = dayFourR + "%";
 
-              dayOneRain.textContent = dayOneR + "%";
-              dayTwoRain.textContent = dayTwoR + "%";
-              dayThreeRain.textContent = dayThreeR + "%";
-              dayFourRain.textContent = dayFourR + "%";
-
-              for (let iteration = 0; iteration <= 3; iteration++) {
-                setDailyIcons(weatherArray[iteration], iteration);
-              }
-            });
-        });
-    });
+            for (let iteration = 0; iteration <= 3; iteration++) {
+              setDailyIcons(weatherArray[iteration], iteration);
+            }
+            dataAcq = true;
+          });
+      });
+  });
 
   function setDailyIcons(weatherArray, iteration) {
     const currentIconId = weatherArray;
@@ -787,7 +779,6 @@ window.addEventListener("load", () => {
     }
   }
 });
-
 function changeMeasurement() {
   if (currentMeasurement === "celcius") {
     fahrenheit = (celcius * 9) / 5 + 32;
@@ -933,12 +924,12 @@ const makeSnow = function () {
 
 (lazyLoadImages = () => {
   let allImages = document.querySelector(".cloud-images").children;
-  setTimeout(()=> {
+  setTimeout(() => {
     for (let image in allImages) {
       allImages[image].src = allImages[image].dataset.src;
       if (image == 9) {
         return;
       }
     }
-  }, 1000)
+  }, 1000);
 })();
