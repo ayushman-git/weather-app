@@ -490,8 +490,11 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/cloudy-weather.json",
       });
+      makeStars();
       document.body.style.background =
-        "linear-gradient(135deg, #0575E6, #021B79)";
+        "linear-gradient(135deg, #1b1b1b, #000000)";
+      // document.body.style.background =
+      //   "linear-gradient(135deg, #0575E6, #021B79)";
       document.querySelector(".cloud-images").style.display = "inline-block";
     } else if (
       (currentIconId === 801 ||
