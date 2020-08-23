@@ -328,28 +328,6 @@ body {
 .sunset-animation {
   width: 2em;
 }
-.sunrise-animation > img {
-  animation: sun-rotate 40s linear infinite;
-}
-.sunset-animation > img {
-  animation: moon-move 10s linear infinite;
-}
-@keyframes moon-move {
-  50% {
-    transform: rotateZ(20deg);
-  }
-}
-@keyframes sun-rotate {
-  0%{
-    transform: rotateZ(0);
-  }
-  50% {
-    transform: rotateZ(180deg);
-  }
-  100% {
-    transform: rotateZ(360deg);
-  }
-}
 
 .am-pm {
   padding-left: 0.3em;

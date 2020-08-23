@@ -74,7 +74,6 @@ window.addEventListener("load", () => {
   let errorMsg = document.querySelector(".error-msg");
 
   navigator.geolocation.getCurrentPosition((position) => {
-    console.log(position)
     long = position.coords.longitude;
     lat = position.coords.latitude;
 
@@ -122,9 +121,6 @@ window.addEventListener("load", () => {
         sunsetTime.appendChild(pm);
         visibilityDigit.textContent = vis;
         cloudsDigit.textContent = clouds;
-        console.log(
-          dateObj.setFullYear(dateSplit(ob_time.substring(ob_time.length - 5)))
-        );
         lastObTime.textContent = dateSplit(
           ob_time.substring(ob_time.length - 5)
         );
@@ -490,11 +486,8 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/cloudy-weather.json",
       });
-      makeStars();
       document.body.style.background =
-        "linear-gradient(135deg, #1b1b1b, #000000)";
-      // document.body.style.background =
-      //   "linear-gradient(135deg, #0575E6, #021B79)";
+        "linear-gradient(135deg, #0575E6, #021B79)";
       document.querySelector(".cloud-images").style.display = "inline-block";
     } else if (
       (currentIconId === 801 ||
@@ -832,7 +825,6 @@ function dateSplit(timeToSplit) {
     amPm = "pm";
     apiHour = apiHour - 12;
   }
-  console.log(apiHour);
   if (apiHour < 0) {
     return apiHour + 12 + ":" + apiMinute;
   } else {
@@ -913,7 +905,6 @@ const makeStars = function () {
     starsDiv[i].style.height = randomSize + "px";
     starsDiv[i].style.width = randomSize + "px";
   }
-  console.log(starsDiv);
 };
 
 const makeSnow = function () {
