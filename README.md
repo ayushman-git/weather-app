@@ -103,6 +103,6 @@ If you want to make changes or introduce new features you need to -
 
 > Education without application is just entertainment. — Tim Sanders
 
-Though I had some understanding of the web development in bits and pieces before, but I never understood how these technologies worked together in conjunction with each other. It was because of this project that helped me to put those pieces together and made me understand the big picture. It made me realize the elegance of web development. Web development have many parts — browser, javascript, DOM, APIs, server and the list goes on. But when you put these things together, it makes sense why these things exists.
+Though I had some understanding of the web development in bits and pieces before, but I never understood how these technologies worked together in conjunction with each other. This project helped me to put those pieces together and made me understand the big picture. It made me realize the elegance of web development. Web development has many parts — browser, javascript, DOM, APIs, server and the list goes on. But when you put these things together, it makes sense why these things exists.
 
 I love creating things and I’m pretty sure that I’ll continue building new things with these tools that I have learned. 😄
