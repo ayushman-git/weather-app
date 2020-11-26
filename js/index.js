@@ -486,8 +486,11 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/cloudy-weather.json",
       });
+      makeStars();
       document.body.style.background =
-        "linear-gradient(135deg, #0575E6, #021B79)";
+        "linear-gradient(135deg, #1b1b1b, #000000)";
+      // document.body.style.background =
+      //   "linear-gradient(135deg, #0575E6, #021B79)";
       document.querySelector(".cloud-images").style.display = "inline-block";
     } else if (
       (currentIconId === 801 ||
@@ -503,9 +506,12 @@ window.addEventListener("load", () => {
         autoplay: true,
         path: "./assets/weather/night-weather.json",
       });
-      makeStars();
+      // makeStars();
+      // document.body.style.background =
+      //   "linear-gradient(135deg, #1b1b1b, #000000)";
       document.body.style.background =
-        "linear-gradient(135deg, #1b1b1b, #000000)";
+        "linear-gradient(135deg, #e4e5e6, #00416a)";
+      makeSnow();
       document.querySelector(".cloud-images").style.display = "inline-block";
       document.querySelector(".cloud-images").style.opacity = "0.3";
     } else if (
@@ -908,7 +914,7 @@ const makeStars = function () {
 };
 
 const makeSnow = function () {
-  let parentDiv = document.querySelector(".snow-background");
+  let parentDiv = document.querySelector(".background-animations");
   for (let i = 0; i <= 200; i++) {
     let snowDiv = document.createElement("div");
     snowDiv.classList.add("snow");

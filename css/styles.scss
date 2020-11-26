@@ -17,6 +17,7 @@ body {
   background: linear-gradient(135deg, #000000, #000000);
   color: white;
   font-family: "Roboto", sans-serif;
+  user-select: none;
 }
 
 ::-moz-selection {
@@ -610,7 +611,3 @@ body {
   width: 80%;
   height: 10%;
 }
-
-// :not(.night-sky):not(.stars) {
-//   visibility: hidden;
-// }
